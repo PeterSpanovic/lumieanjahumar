@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<html class="scroll-smooth" lang="sl"><head>
+<html class="scroll-smooth" lang="sl">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Lumie | Lepotno zatočišče</title>
@@ -113,37 +113,18 @@
             transform: scale(1);
         }
     </style>
-<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const observerOptions = {
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.reveal').forEach((el) => {
-                observer.observe(el);
-            });
-        });
-    </script>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-stone-50/80 backdrop-blur-xl flex justify-between items-center px-6 md:px-12 py-6 max-w-[1920px] mx-auto">
-<div class="font-headline text-2xl font-bold tracking-tighter text-orange-900">Lumie</div>
+<div class="font-headline text-2xl font-bold tracking-tighter text-orange-900 cursor-pointer" onclick="scrollToHero()">Lumie</div>
 <div class="hidden md:flex space-x-8 items-center">
-<a class="text-orange-800 font-semibold border-b-2 border-orange-800 pb-1 font-serif tracking-tight text-lg" href="#hero">Domov</a>
-<a class="text-stone-600 hover:text-orange-800 transition-colors font-serif tracking-tight text-lg" href="#services">Storitve</a>
-<a class="text-stone-600 hover:text-orange-800 transition-colors font-serif tracking-tight text-lg" href="#about">O nas</a>
-<a class="text-stone-600 hover:text-orange-800 transition-colors font-serif tracking-tight text-lg" href="#location">Lokacija</a>
+<a class="text-orange-800 font-semibold border-b-2 border-orange-800 pb-1 font-serif tracking-tight text-lg cursor-pointer" onclick="scrollToSection('hero')">Domov</a>
+<a class="text-stone-600 hover:text-orange-800 transition-colors font-serif tracking-tight text-lg cursor-pointer" onclick="scrollToSection('services')">Storitve</a>
+<a class="text-stone-600 hover:text-orange-800 transition-colors font-serif tracking-tight text-lg cursor-pointer" onclick="scrollToSection('about')">O nas</a>
+<a class="text-stone-600 hover:text-orange-800 transition-colors font-serif tracking-tight text-lg cursor-pointer" onclick="scrollToSection('location')">Lokacija</a>
 </div>
-<a class="bg-orange-800 text-white px-6 py-2 rounded-full font-serif text-lg hover:opacity-80 transition-opacity duration-300" href="mailto:info@lumie.si">Rezerviraj zdaj</a>
+<button class="bg-orange-800 text-white px-6 py-2 rounded-full font-serif text-lg hover:opacity-80 transition-opacity duration-300" onclick="openUchatzWidget()">Rezerviraj zdaj</button>
 </nav>
 <main>
 <!-- Hero Section -->
@@ -158,8 +139,8 @@
                         Izkusite digitalno zatočišče, ustvarjeno za sodobno eteričnost. Profesionalna estetika se sreča z mladostno energijo v naši kurirani lepotni izkušnji.
                     </p>
 <div class="flex flex-wrap gap-4">
-<a class="editorial-gradient text-on-primary px-8 py-4 rounded-full font-semibold shadow-xl hover:scale-105 transition-transform" href="#services">Raziščite rituale</a>
-<a class="border border-outline text-primary px-8 py-4 rounded-full font-semibold hover:bg-primary/5 transition-colors" href="mailto:info@lumie.si">Stopi v stik</a>
+<button class="editorial-gradient text-on-primary px-8 py-4 rounded-full font-semibold shadow-xl hover:scale-105 transition-transform" onclick="openUchatzWidget()">Raziščite rituale</button>
+<button class="border border-outline text-primary px-8 py-4 rounded-full font-semibold hover:bg-primary/5 transition-colors" onclick="openUchatzWidget()">Stopi v stik</button>
 </div>
 </div>
 <div class="md:col-span-6 relative reveal" style="transition-delay: 200ms;">
@@ -171,7 +152,7 @@
 </div>
 </section>
 <!-- Founder's Message -->
-<section class="py-32 bg-surface-container-low">
+<section class="py-32 bg-surface-container-low" id="about">
 <div class="container mx-auto px-6 md:px-12">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 <div class="order-2 md:order-1 reveal">
@@ -204,10 +185,10 @@
 <h2 class="font-headline text-5xl text-on-surface mb-6">Podpisni rituali</h2>
 <p class="text-on-surface-variant text-lg">Kuriran meni lepotnih storitev, zasnovanih za poudarjanje vašega naravnega sijaja s pomočjo strokovne natančnosti in vrhunskih organskih formulacij.</p>
 </div>
-<a class="text-primary font-semibold text-lg flex items-center group" href="mailto:info@lumie.si">
+<button class="text-primary font-semibold text-lg flex items-center group" onclick="openUchatzWidget()">
                         Rezerviraj zdaj
                         <span class="material-symbols-outlined ml-2 transition-transform group-hover:translate-x-2">arrow_forward</span>
-</a>
+</button>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 <!-- Skin -->
@@ -277,14 +258,13 @@
 </div>
 </section>
 <!-- About/Team Section -->
-<section class="py-32 bg-secondary text-on-secondary" id="about">
+<section class="py-32 bg-secondary text-on-secondary">
 <div class="container mx-auto px-6 md:px-12">
 <div class="text-center mb-20 reveal">
 <h2 class="font-headline text-5xl mb-6">Naši strokovnjaki</h2>
 <p class="max-w-2xl mx-auto opacity-80 text-lg">Mojstri svoje obrti, ki združujejo klinično znanje z umetniškim očesom.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-<!-- Specialist 1 -->
 <div class="text-center reveal">
 <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 border-4 border-on-secondary/10 parallax-wrap">
 <img alt="Elena Rossi, Color Specialist" class="w-full h-full object-cover parallax-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7e01bnDem-3a98cauIS1KO_HFOWlS9mtnB-ZqDgD-xCiTGmTfPcoc_DKraortatG7aRmizUqwCnOyjnMst9LMOkfDrnttDB-Xj8cDz4gHNdjTak-N9ADghpgYMidOBrCsewmIwWviK3o2NJcDu0JpelLlkOlc0Z4uyrBU7U8yKEI02GJRdPo_tqDbDHozET-EtqWSDmQwVh4Az2oDV3dLFJJkNbiH8QTaXJR_79BurKkI1NEpSPsVLtuysSGX1tHranwPgfJljTE"/>
@@ -292,7 +272,6 @@
 <h4 class="font-headline text-xl mb-1">Elena Rossi</h4>
 <p class="text-sm opacity-70 uppercase tracking-widest">Mojstrica barvanja</p>
 </div>
-<!-- Specialist 2 -->
 <div class="text-center reveal" style="transition-delay: 100ms;">
 <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 border-4 border-on-secondary/10 parallax-wrap">
 <img alt="Marcus Thorne, Creative Stylist" class="w-full h-full object-cover parallax-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd5WBD5CRmg0ipi7D0rsYLES39xT6QW2kQ45HVurUrXxyJe5iMG3IHtAH5gKl5lIZ1tcEShx7aRE9yB5xinYlIjUZ0GATnm4JB_HUR9T6SunmVvGjF-qigXvz_z6sY8uG5SdfGGyY2XJngubasL6bPKfCeNLktXHYdMq769hz4oiIuMTUel8TqEGZ94262hJbR4IeEZyfQqpz_720zlJJx0tLiReqiiapBTshnEpqLUFMfeVOyeko27wevFQMIIn9CI6ljqhLXsYU"/>
@@ -300,7 +279,6 @@
 <h4 class="font-headline text-xl mb-1">Marcus Thorne</h4>
 <p class="text-sm opacity-70 uppercase tracking-widest">Kreativni stilist</p>
 </div>
-<!-- Specialist 3 -->
 <div class="text-center reveal" style="transition-delay: 200ms;">
 <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 border-4 border-on-secondary/10 parallax-wrap">
 <img alt="Sofia Chen, Aesthetician" class="w-full h-full object-cover parallax-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUINVbcxuF_K3_3jOf9IejJn2iEKj1WUhJgo9rmQkAvCmnq5XVE1KsmTDNgq-4N_2VLHDA7Zmm72QLp4-Is2Ci0r5VF6AunfV1gTzPGeN6V6vEDLCyFCvmyORNd7WRTYtFIi5hhZulS1LJAuTTqHNfXFfNLhq59P0Pr-J6Yv1TvRHM1qWxbvvSEouJ8njLU11mul8bxRzh5TXT3bw1fzI0aCKSy-j6iFFIxW_PD-pQ5wMpHmLv3p4qnOyrJNMqlc-J51g808dM7aM"/>
@@ -308,7 +286,6 @@
 <h4 class="font-headline text-xl mb-1">Sofia Chen</h4>
 <p class="text-sm opacity-70 uppercase tracking-widest">Vodilna estetičarka</p>
 </div>
-<!-- Specialist 4 -->
 <div class="text-center reveal" style="transition-delay: 300ms;">
 <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 border-4 border-on-secondary/10 parallax-wrap">
 <img alt="Isabella V., Nail Artist" class="w-full h-full object-cover parallax-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrRoEOscOu-GlUHy1kBESh-yJDgwIwEYyO83ZeLZpXGegXNjRsm4ygTcPInFl153XoKDoFV0s-Ov4Nkwixl_bWxeMWm5lS25JndCqQb5C_rll12QCA5ZyNydfCJAPD2eIRnu8DJwzO9X7m1XRvlQu5ikZ47elU7Z_vFHaByvpu1Oyz_t064em5RKAfFrmXE4tm_wXU17KK7QCjWhEcKOjbZXWQxUKafOBoBp4KXpR1Zj7eMZtfQnMbp3OkJDd96ibwLFflhXnJ5vw"/>
@@ -346,9 +323,8 @@
 </div>
 </div>
 <div class="w-full md:w-1/2 reveal" style="transition-delay: 200ms;">
-<div class="aspect-video w-full bg-surface-container-highest rounded-xl overflow-hidden shadow-xl border border-outline/10 group cursor-pointer relative">
+<div class="aspect-video w-full bg-surface-container-highest rounded-xl overflow-hidden shadow-xl border border-outline/10 group cursor-pointer relative" onclick="openUchatzWidget()">
 <img alt="Map location in Koper" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn-59Z8-2l9Jp8GqPjYvX5lG2o5J8r1s2w3e4r5t6y7u8i9o0p-a-s-d-f-g-h-j-k-l-z-x-c-v-b-n-m-1-2-3-4-5-6-7-8-9-0"/>
-<!-- Map Overlay UI Mockup -->
 <div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
 <div class="bg-primary text-white p-3 rounded-full shadow-2xl animate-bounce">
@@ -364,15 +340,15 @@
 </div>
 </section>
 <!-- Booking CTA Section -->
-<section class="py-32 bg-surface" id="booking-cta">
+<section class="py-32 bg-surface">
 <div class="container mx-auto px-6 md:px-12 text-center reveal">
 <h2 class="font-headline text-5xl mb-8">Ste pripravljeni na svoj trenutek?</h2>
 <p class="text-lg text-on-surface-variant max-w-2xl mx-auto mb-10">
                     Za rezervacije in informacije nas prosim kontaktirajte preko spodnjih povezav. Veselimo se vašega obiska v našem zatočišču.
                 </p>
 <div class="flex flex-col sm:flex-row justify-center gap-4">
-<a class="editorial-gradient text-on-primary px-12 py-5 rounded-full font-bold text-xl shadow-2xl hover:scale-105 transition-transform inline-block" href="mailto:info@lumie.si">Rezerviraj zdaj</a>
-<a class="border border-outline text-primary px-12 py-5 rounded-full font-bold text-xl hover:bg-primary/5 transition-all inline-block" href="mailto:info@lumie.si">Stopi v stik</a>
+<button class="editorial-gradient text-on-primary px-12 py-5 rounded-full font-bold text-xl shadow-2xl hover:scale-105 transition-transform inline-block" onclick="openUchatzWidget()">Rezerviraj zdaj</button>
+<button class="border border-outline text-primary px-12 py-5 rounded-full font-bold text-xl hover:bg-primary/5 transition-all inline-block" onclick="openUchatzWidget()">Stopi v stik</button>
 </div>
 </div>
 </section>
@@ -403,11 +379,55 @@
 <p class="font-sans text-sm tracking-wide text-stone-500">© 2024 Lumie Lepotno zatočišče. Ustvarjeno za eterično lepoto.</p>
 </div>
 <div class="flex flex-wrap justify-center gap-8">
-<a class="text-stone-500 hover:text-stone-800 font-sans text-sm tracking-wide transition-all" href="#">Politika zasebnosti</a>
-<a class="text-stone-500 hover:text-stone-800 font-sans text-sm tracking-wide transition-all" href="#">Pogoji poslovanja</a>
-<a class="text-stone-500 hover:text-stone-800 font-sans text-sm tracking-wide transition-all" href="#">Instagram</a>
-<a class="text-stone-500 hover:text-stone-800 font-sans text-sm tracking-wide transition-all font-semibold" href="mailto:info@lumie.si">Stopi v stik</a>
+<button class="text-stone-500 hover:text-stone-800 font-sans text-sm tracking-wide transition-all" onclick="openUchatzWidget()">Politika zasebnosti</button>
+<button class="text-stone-500 hover:text-stone-800 font-sans text-sm tracking-wide transition-all" onclick="openUchatzWidget()">Pogoji poslovanja</button>
+<button class="text-stone-500 hover:text-stone-800 font-sans text-sm tracking-wide transition-all" onclick="openUchatzWidget()">Instagram</button>
+<button class="text-stone-500 hover:text-stone-800 font-sans text-sm tracking-wide transition-all font-semibold" onclick="openUchatzWidget()">Stopi v stik</button>
 </div>
 </div>
-</footer><script src="https://uchatz.com/widget.js" data-id="98735219-265f-4d14-8c1a-733eb1bdb214" data-color="#a43c12" async></script>
-</body></html>
+</footer>
+
+<!-- UchatZ widget: correct integration with data-id (not data-key) -->
+<script src="https://uchatz.com/widget.js" data-id="98735219-265f-4d14-8c1a-733eb1bdb214" data-color="#a43c12" async></script>
+
+<script>
+    // Universal function to open the UchatZ widget by clicking the hidden bubble
+    function openUchatzWidget() {
+        const bubble = document.getElementById('chattly-bubble');
+        if (bubble) {
+            bubble.click();
+        } else {
+            // Widget not loaded yet – wait for it to appear
+            const observer = new MutationObserver(() => {
+                const b = document.getElementById('chattly-bubble');
+                if (b) {
+                    b.click();
+                    observer.disconnect();
+                }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+            // Fallback timeout after 3 seconds
+            setTimeout(() => observer.disconnect(), 3000);
+        }
+    }
+
+    // Smooth scroll helpers
+    function scrollToSection(id) {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+    function scrollToHero() { scrollToSection('hero'); }
+
+    // Intersection Observer for reveal animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+</script>
+</body>
+</html>
