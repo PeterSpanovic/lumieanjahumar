@@ -1,353 +1,1166 @@
+<!-- Design System -->
 <!DOCTYPE html>
-<html lang="sl">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Lumie Beauty Salon | Koper</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f6; color: #1a1c1a; line-height: 1.6; }
-        .page { display: none !important; }
-        .page.active { display: block !important; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(250, 249, 246, 0.95); backdrop-filter: blur(10px); z-index: 50; border-bottom: 1px solid #dec0b6; padding: 1rem 2rem; }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { font-family: 'Noto Serif', serif; font-style: italic; font-size: 1.5rem; cursor: pointer; color: #1a1c1a; font-weight: 700; }
-        .nav-links { display: flex; gap: 2rem; flex: 1; justify-content: center; }
-        .nav-links a { cursor: pointer; color: #57423b; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
-        .nav-links a:hover { color: #a43c12; }
-        .nav-right { display: flex; gap: 1rem; align-items: center; }
-        .lang-select { cursor: pointer; padding: 0.5rem 1rem; background: none; border: none; font-size: 0.85rem; color: #57423b; font-weight: 500; }
-        .book-btn { background: linear-gradient(135deg, #a43c12 0%, #ff7f50 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(164, 60, 18, 0.2); }
-        main { margin-top: 80px; padding: 0 2rem; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; padding: 4rem 0; margin-bottom: 4rem; }
-        .hero-text h1 { font-family: 'Noto Serif', serif; font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; color: #1a1c1a; }
-        .hero-text h1 .gradient { background: linear-gradient(135deg, #a43c12, #ff7f50); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: italic; }
-        .hero-text p { font-size: 1.1rem; color: #57423b; margin-bottom: 2rem; max-width: 500px; line-height: 1.8; }
-        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .btn-primary { background: linear-gradient(135deg, #a43c12 0%, #ff7f50 100%); color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(164, 60, 18, 0.2); }
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-3px); }
-        .btn-secondary { background: white; color: #1a1c1a; padding: 1rem 2rem; border: 2px solid #dec0b6; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s; }
-        .btn-secondary:hover { background: #f4f3f1; transform: translateY(-3px); }
-        .hero-image img { width: 100%; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(164, 60, 18, 0.1); }
-        .personal-box { background: rgba(71, 102, 75, 0.1); border-left: 4px solid #a43c12; padding: 2rem; border-radius: 1rem; margin: 3rem 0; max-width: 800px; }
-        .personal-box h3 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-bottom: 1rem; color: #1a1c1a; }
-        .personal-box p { color: #57423b; font-style: italic; line-height: 1.8; }
-        .cta-section { background: linear-gradient(135deg, rgba(164, 60, 18, 0.1) 0%, rgba(255, 127, 80, 0.05) 100%); border: 1px solid #dec0b6; border-radius: 1.5rem; padding: 3rem; text-align: center; margin: 4rem 0; }
-        .cta-section h2 { font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 1rem; color: #1a1c1a; }
-        .cta-section p { color: #57423b; font-size: 1.1rem; margin-bottom: 2rem; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
-        .service-card { background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #dec0b6; transition: all 0.3s; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(164, 60, 18, 0.1); }
-        .service-card h3 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-bottom: 1rem; color: #1a1c1a; }
-        .service-card p { color: #57423b; font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.7; }
-        .service-footer { display: flex; justify-content: space-between; align-items: center; }
-        .service-price { color: #ff7f50; font-weight: 700; font-size: 1.1rem; }
-        .service-btn { background: none; border: none; color: #a43c12; cursor: pointer; font-size: 1.5rem; transition: color 0.2s; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin: 3rem 0; }
-        .about-text h2 { font-family: 'Noto Serif', serif; font-size: 2rem; margin-bottom: 1.5rem; color: #1a1c1a; }
-        .about-text p { color: #57423b; margin-bottom: 1.5rem; line-height: 1.8; font-size: 1rem; }
-        .about-image img { width: 100%; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(164, 60, 18, 0.1); }
-        .why-solo { background: linear-gradient(to bottom, #f4f3f1, #faf9f6); padding: 3rem; border-radius: 1.5rem; margin: 3rem 0; }
-        .why-solo h2 { font-family: 'Noto Serif', serif; font-size: 2rem; margin-bottom: 2rem; color: #1a1c1a; }
-        .why-solo-item { margin-bottom: 2rem; color: #57423b; line-height: 1.8; }
-        .why-solo-item strong { color: #a43c12; }
-        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 3rem 0; }
-        .value-card { background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #dec0b6; text-align: center; }
-        .value-card h4 { font-family: 'Noto Serif', serif; font-size: 1.2rem; margin-bottom: 1rem; color: #1a1c1a; }
-        .value-card p { color: #57423b; font-size: 0.95rem; line-height: 1.6; }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 3rem 0; }
-        .contact-form { background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #dec0b6; }
-        .contact-form h2 { font-family: 'Noto Serif', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: #1a1c1a; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; color: #1a1c1a; font-weight: 500; font-size: 0.9rem; }
-        .form-group input, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #dec0b6; border-radius: 0.5rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; color: #1a1c1a; }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #a43c12; box-shadow: 0 0 0 3px rgba(164, 60, 18, 0.1); }
-        .form-submit { width: 100%; background: linear-gradient(135deg, #a43c12 0%, #ff7f50 100%); color: white; padding: 1rem; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 1rem; }
-        .form-submit:hover { opacity: 0.9; }
-        .contact-info { background: rgba(71, 102, 75, 0.1); padding: 2rem; border-radius: 1rem; }
-        .contact-info h3 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-bottom: 1.5rem; color: #1a1c1a; }
-        .info-item { margin-bottom: 1.5rem; }
-        .info-label { font-weight: 600; color: #1a1c1a; margin-bottom: 0.3rem; }
-        .info-value { color: #57423b; }
-        .info-value a { color: #a43c12; text-decoration: none; }
-        .info-value a:hover { text-decoration: underline; }
-        .legal-page { max-width: 900px; margin: 2rem auto; padding: 2rem 0; }
-        .legal-page h1 { font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 2rem; color: #1a1c1a; }
-        .legal-page h2 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a1c1a; }
-        .legal-page p { color: #57423b; line-height: 1.8; margin-bottom: 1rem; }
-        footer { background: #f0f0f0; color: #57423b; padding: 3rem 2rem 1rem; margin-top: 4rem; border-top: 1px solid #dec0b6; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        .footer-section h4 { font-weight: 700; color: #1a1c1a; margin-bottom: 1rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
-        .footer-section p, .footer-section a { font-size: 0.9rem; line-height: 1.8; color: #57423b; text-decoration: none; }
-        .footer-section a:hover { color: #a43c12; }
-        .footer-bottom { border-top: 1px solid #dec0b6; padding-top: 1.5rem; text-align: center; font-size: 0.85rem; }
-        @media (max-width: 768px) {
-            nav { padding: 0.75rem 1rem; }
-            .nav-links { display: none; }
-            main { margin-top: 100px; padding: 0 1rem; }
-            .hero { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 0; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .about-grid, .contact-grid { grid-template-columns: 1fr; }
-            .services-grid { grid-template-columns: 1fr; }
-            .hero-buttons { flex-direction: column; }
-            .btn-primary, .btn-secondary { width: 100%; }
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services &amp; Pricing | Lumie Beauty Salon</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface": "#faf9f6",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dbdad7",
+                        "on-secondary-container": "#4b6a4f",
+                        "surface-variant": "#e3e2e0",
+                        "secondary-fixed": "#c8ebca",
+                        "outline-variant": "#dec0b6",
+                        "on-tertiary-fixed": "#1f1b14",
+                        "on-tertiary-fixed-variant": "#4c463e",
+                        "surface-container-highest": "#e3e2e0",
+                        "surface-container-high": "#e9e8e5",
+                        "on-primary-container": "#6c2000",
+                        "primary": "#a43c12",
+                        "surface-bright": "#faf9f6",
+                        "outline": "#8b7169",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#adcfaf",
+                        "inverse-surface": "#2f312f",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f2f1ee",
+                        "on-surface-variant": "#57423b",
+                        "on-secondary-fixed": "#03210c",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#ff7f50",
+                        "primary-fixed-dim": "#ffb59c",
+                        "inverse-primary": "#ffb59c",
+                        "tertiary-container": "#aba399",
+                        "on-tertiary-container": "#3f3932",
+                        "on-primary-fixed": "#380c00",
+                        "tertiary-fixed": "#ebe1d6",
+                        "on-secondary-fixed-variant": "#304d35",
+                        "on-primary-fixed-variant": "#822800",
+                        "background": "#faf9f6",
+                        "secondary": "#47664b",
+                        "primary-fixed": "#ffdbcf",
+                        "surface-tint": "#a43c12",
+                        "on-surface": "#1a1c1a",
+                        "surface-container-low": "#f4f3f1",
+                        "secondary-container": "#c6e9c7",
+                        "surface-container": "#efeeeb",
+                        "tertiary": "#645d55",
+                        "tertiary-fixed-dim": "#cec5bb",
+                        "on-background": "#1a1c1a",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-text-stroke {
+            -webkit-text-stroke: 1px rgba(164, 60, 18, 0.2);
+            color: transparent;
+        }
+        .mosaic-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
         }
     </style>
 </head>
-<body>
-
-<nav>
-    <div class="nav-container">
-        <div class="nav-logo" onclick="showPage('home')">Lumie</div>
-        <div class="nav-links">
-            <a onclick="showPage('home')" data-i18n="nav.home">Dom</a>
-            <a onclick="showPage('services')" data-i18n="nav.services">Storitve</a>
-            <a onclick="showPage('about')" data-i18n="nav.about">O meni</a>
-            <a onclick="showPage('contact')" data-i18n="nav.contact">Kontakt</a>
-        </div>
-        <div class="nav-right">
-            <select class="lang-select" id="langSelect" onchange="setLanguage(this.value)">
-                <option value="sl">SL</option>
-                <option value="en">EN</option>
-                <option value="it">IT</option>
-            </select>
-            <button class="book-btn" onclick="openUchatzWidget()" data-i18n="nav.book">Rezerviraj</button>
-        </div>
-    </div>
+<body class="bg-surface text-on-surface font-body antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-serif italic text-stone-900 dark:text-stone-50">Lumie</div>
+<div class="hidden md:flex items-center gap-8 font-serif tracking-tight">
+<a class="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Home</a>
+<a class="text-orange-800 dark:text-orange-400 font-bold border-b-2 border-orange-800 dark:border-orange-400 pb-1" href="#">Services</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Booking</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-full font-medium active:scale-95 transition-transform hover:opacity-80">
+                Book Now
+            </button>
+</div>
 </nav>
-
-<main id="page-home" class="page active">
-    <div class="container">
-        <section class="hero">
-            <div class="hero-text">
-                <h1><span data-i18n="home.hero.radiant">Umetnost</span> <span class="gradient">Sevanja</span></h1>
-                <p data-i18n="home.hero.desc">Stopite v intimni prostor, kjer se klinična natančnost sreča z osebno nego. Doživite vrhunske lepotne tretmaje, zasnovane za razkritje vašega najbolj žarečega jaza.</p>
-                <div class="hero-buttons">
-                    <button class="btn-primary" onclick="openUchatzWidget()" data-i18n="home.explore">Raziskuj Storitve</button>
-                    <button class="btn-secondary" onclick="openUchatzWidget()" data-i18n="home.reserve">Rezerviraj Zdaj</button>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6AaizB2jVEJO0C9MQxk50i-2Ehv_Cu5-OeJ7Go4ZEw0ITnVDnETAS2gouMKuLvkpmeS_MEYcCvCjLc_7nYfHq4KWqeGcG0jLz6O5tHSIc-z1RW0T7xcxl8v-8CaCZBKrL6MkLe5S6RO4PwBqkUGEXd705aVyVANmqbg91RwD5cE4CQAdVQfypnZmIPgin-wvyjn7I4nfSwF53QXNUtntXG0fjWVc9lL0ZOIgw5caz7zjrYoch5AZSSgioqAt71cDbP3b7mhEXHUM" alt="Lumie Beauty"/>
-            </div>
-        </section>
-
-        <section class="personal-box">
-            <h3>✨ <span data-i18n="home.personal.title">Samo Mene, Samo Za Vas</span></h3>
-            <p data-i18n="home.personal.intro">Sem Anja, lasnica Lumie. Vsak termin vodim osebno jaz – zato poznate vsakič isto osebo, iste roke in isto strokovno znanje. Tukaj ni timov, samo individualna pozornost in resna skrb za vašo lepoto.</p>
-        </section>
-
-        <section class="cta-section">
-            <h2 data-i18n="home.cta.title">Pripravljen/a za transformacijo?</h2>
-            <p data-i18n="home.cta.desc">Mesta se hitro napolnijo. Pošlji mi sporočilo ali pokliči.</p>
-            <button class="btn-primary" onclick="openUchatzWidget()" data-i18n="home.cta.button">Rezerviraj Zdaj</button>
-        </section>
-    </div>
+<main class="pt-32 pb-20">
+<!-- Hero Section: Editorial Header -->
+<header class="max-w-7xl mx-auto px-8 mb-32">
+<div class="relative">
+<span class="font-headline italic text-8xl md:text-9xl editorial-text-stroke absolute -top-12 -left-4 opacity-40">Rituals</span>
+<h1 class="font-headline text-6xl md:text-7xl font-bold tracking-tight text-on-surface relative z-10">
+                    The Service <br/> Menu
+                </h1>
+<p class="mt-8 max-w-lg text-lg text-on-surface-variant font-light leading-relaxed">
+                    Designed to rejuvenate your spirit and enhance your natural beauty. Our treatments combine modern techniques with soulful care.
+                </p>
+</div>
+</header>
+<!-- Category: Hair (Asymmetric Mosaic Layout) -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<div class="flex flex-col md:flex-row gap-16 items-start">
+<div class="w-full md:w-5/12 sticky top-32">
+<h2 class="font-headline text-4xl mb-4">Hair Artistry</h2>
+<p class="text-on-surface-variant mb-8 font-light">From dimensional color to precision cuts, our stylists curate looks that reflect your personality and lifestyle.</p>
+<div class="space-y-6">
+<div class="flex justify-between items-end border-b border-outline-variant/20 pb-2 group">
+<div>
+<h4 class="font-medium text-lg">Signature Cut &amp; Style</h4>
+<p class="text-sm text-on-surface-variant italic">Personalized consultation and finish</p>
+</div>
+<span class="text-primary font-bold">from $85</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/20 pb-2">
+<div>
+<h4 class="font-medium text-lg">Lumie Dimension Balayage</h4>
+<p class="text-sm text-on-surface-variant italic">Hand-painted sun-kissed highlights</p>
+</div>
+<span class="text-primary font-bold">from $210</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/20 pb-2">
+<div>
+<h4 class="font-medium text-lg">Gloss &amp; Tone Ritual</h4>
+<p class="text-sm text-on-surface-variant italic">High-shine semi-permanent color</p>
+</div>
+<span class="text-primary font-bold">$65</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/20 pb-2">
+<div>
+<h4 class="font-medium text-lg">Botanical Hair Therapy</h4>
+<p class="text-sm text-on-surface-variant italic">Deep conditioning plant-based mask</p>
+</div>
+<span class="text-primary font-bold">$45</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-7/12 grid grid-cols-2 gap-4">
+<div class="col-span-2 aspect-[16/9] overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover" data-alt="close-up of a stylist working on long blonde wavy hair in a sunlit salon with soft warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWMR54XBJ81_UIUv7MEsC4I5L_HCXeq4hqOTBr2tkhhXSk4RegSh1ssZGtJteJT3evaMWHIUWUcKSIjfJUSBcRACb_jMFOBLT4jmta4OSeL-qcyPUGCZ-Fgfc7eFKWlXDsryi0SyZ3uJxxnyIrLcfhCOzUlxzx1HHN44XHZZaY-YevBgMNqDRO5I-dPw9AnrtAuoeGAPWwhI91MH7ZMgBAzNSramRiDA2RLeyZhIMpoKhTZiR5ts4Q_CKBYbh_A0qcGT5L17KnN_4"/>
+</div>
+<div class="aspect-square overflow-hidden rounded-xl mt-4">
+<img class="w-full h-full object-cover" data-alt="detail of professional hair coloring products and brushes on a clean stone surface with sage green accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnhpSAcnbSijzOE9JF7nIszdmCOd-zzVsPjMAqS68xW2tbS22TfcpBI0zciU1ImzcSxgR01i07YaESOA0kMABgqmWw43mtRYChqAjNfrg_h7NsN1SA_qnQoPfFws7RGqgFnNmNCVspwpPVmmRoSyJsLYstGMW0rDOSL25X0n0SwDG-xVPmMU4Nk034JoBatqOU0SsobLSlhjm1Uqs-o7ZgkZUt7MgQH-GHzoJIxZ8oob9V90EO0qHXHZS0ndSV13OXnNAQ1dHu_5c"/>
+</div>
+<div class="aspect-square overflow-hidden rounded-xl -mt-8">
+<img class="w-full h-full object-cover" data-alt="portrait of a woman with beautiful long hair looking over her shoulder in high-key soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0oUTeu9tn9fyp-UNAsO5SJVBVJ_gNkJ68jUfAizq3Z7qe1ygCIdmMXmWaDnEyLTbD1HYICgk9AQlm6uDFhUK0xOmEHibPNvslU3lmvhCjFsiFk3LhpJSoCY29vta-aI1MBlA0qfJXkfwjsx4GTZ_moRmNVXCOySuwlLqL8jFMM22qN0QIB_O3K2XjDZkOeloH0gyWuIW1hb_ltfht2TsHUZIwFn2epBb6qUBFgjx_6SoGPx_-DfGrcBxKQBLlcTuPXBA7tehK0hs"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Category: Skin (Tonal Shift Background) -->
+<section class="bg-surface-container-low py-32 mb-40">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row-reverse gap-16 items-center">
+<div class="w-full md:w-5/12">
+<span class="inline-block px-4 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold uppercase tracking-widest mb-6">Dermatology Inspired</span>
+<h2 class="font-headline text-4xl mb-6">Skin Studio</h2>
+<p class="text-on-surface-variant mb-10 font-light leading-relaxed">
+                            Holistic treatments that prioritize skin health and radiance. We use medical-grade actives combined with facial massage techniques for instant and lasting results.
+                        </p>
+<div class="grid grid-cols-1 gap-8">
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-medium">The Lumie Glow Facial</h3>
+<span class="text-primary font-bold">$140</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-4">60 mins — Double cleanse, enzyme peel, oxygen infusion, and cooling mask.</p>
+<button class="text-primary text-sm font-bold flex items-center gap-1 group">
+                                    Book This Treatment <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-medium">Sculpt &amp; Lift Manual Therapy</h3>
+<span class="text-primary font-bold">$165</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-4">75 mins — Deep tissue facial massage targeting tension and lymphatic drainage.</p>
+<button class="text-primary text-sm font-bold flex items-center gap-1 group">
+                                    Book This Treatment <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="w-full md:w-7/12 relative">
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
+<img class="w-full h-[600px] object-cover rounded-xl shadow-lg relative z-10" data-alt="serene woman receiving a facial treatment with white cream applied to her face in a spa setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADHkiH-eMh41XM-0ZigM1ZfOOXBzCTHXW3QD9Ugko2CrXsjS8fk_iM4gqj4cRemKmWrBLvN6IybueYm0GcRKrU-zsUCGPDx0KjmGCSCtL0qW2Bi5nA2AzTcMpGhR-IinoxRJv7RpYIOU0WEeVRxnq47IHYt2-vMFi_HeA-jlzPwONMM8PxOG8txlomsHuOS2OLIXhpiQTkK2eXbXPrX7uHPXX2dJ6libIe-f-2Jb8Bl_VdsoLYxAhJt6MU1EoaFvSZ-SaSiGZIfKY"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Category: Nails (Bento Style Grid) -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<h2 class="font-headline text-4xl mb-16 text-center italic">Nail Aesthetics</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Service 1 -->
+<div class="bg-surface-container-low rounded-xl p-8 flex flex-col justify-between hover:bg-surface-container-high transition-colors">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-4" data-weight="fill">spa</span>
+<h3 class="text-2xl font-medium mb-4">Luxe Manicure</h3>
+<p class="text-on-surface-variant text-sm mb-8">Nail shaping, cuticle care, scrub, massage, and gel polish finish.</p>
+</div>
+<div class="flex justify-between items-center mt-auto pt-8 border-t border-outline-variant/30">
+<span class="font-bold text-xl">$55</span>
+<button class="bg-on-surface text-surface px-4 py-2 rounded-full text-xs font-bold active:scale-95 transition-transform">SELECT</button>
+</div>
+</div>
+<!-- Service 2 (Large Image Card) -->
+<div class="md:col-span-1 rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="elegant minimal nail art on well-groomed hands holding a soft linen fabric with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBABFn0NVlgQeeDfv7d0B7PwJYroyjL0wlI7-ekjpmsUVaUTMIuTkTHpFO8AqFz7mOqzUGQJhtS5YfpA5dp1uW4TPi_24xhTtKUvWddmGy3enZw0rYT_cZL91rGAzertMzvi0sncd9r1e_eOdyvKLzKG4LDtuNTuAhMdeZvrpQujBfM0Pk5S1J4d5lt20YbPP2S20LuOpAkZzlv4U0OX-tTpTVKAQeKPAhgC7z7vBrWqeeNj61fbcctmIoz0-ovuBohehhwR0aLvCk"/>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<p class="font-headline text-2xl italic">Minimalist Art</p>
+</div>
+</div>
+<!-- Service 3 -->
+<div class="bg-surface-container-low rounded-xl p-8 flex flex-col justify-between hover:bg-surface-container-high transition-colors">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-4" data-weight="fill">footprint</span>
+<h3 class="text-2xl font-medium mb-4">Cloud Pedicure</h3>
+<p class="text-on-surface-variant text-sm mb-8">Ultimate foot ritual with sea salt soak and hydrating paraffin treatment.</p>
+</div>
+<div class="flex justify-between items-center mt-auto pt-8 border-t border-outline-variant/30">
+<span class="font-bold text-xl">$75</span>
+<button class="bg-on-surface text-surface px-4 py-2 rounded-full text-xs font-bold active:scale-95 transition-transform">SELECT</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="max-w-4xl mx-auto px-8 text-center py-20 bg-primary/5 rounded-3xl border border-primary/10">
+<h2 class="font-headline text-4xl md:text-5xl mb-6">Ready for your transformation?</h2>
+<p class="text-on-surface-variant mb-10 text-lg font-light">Spaces fill quickly. Reserve your appointment today for an elevated beauty experience.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:opacity-90 active:scale-95 transition-all">
+                    Book Online Now
+                </button>
+<button class="bg-surface-container-highest text-on-surface px-10 py-4 rounded-full font-bold text-lg hover:bg-surface-container-high transition-all">
+                    Call Salon
+                </button>
+</div>
+</section>
 </main>
-
-<main id="page-services" class="page">
-    <div class="container">
-        <h1 style="font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 2rem;" data-i18n="services.title">Meni Storitev</h1>
-        <p style="color: #57423b; font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px;" data-i18n="services.desc">Specializiram se na vrhunske obdelave obraza in nege kože. Vsaka storitev je prilagojena vašim potrebam.</p>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3 data-i18n="services.facial1.name">Lumie Sij Facial</h3>
-                <p data-i18n="services.facial1.desc">60 min — Dvojno čiščenje, encimski peeling, infuzija kisika in hladilna maska. Popoln reset za vašo kožo.</p>
-                <div class="service-footer">
-                    <span class="service-price">€140</span>
-                    <button class="service-btn" onclick="openUchatzWidget()">→</button>
-                </div>
-            </div>
-            <div class="service-card">
-                <h3 data-i18n="services.facial2.name">Oblikuj in Dvigni</h3>
-                <p data-i18n="services.facial2.desc">75 min — Globinska masaža obraza, namenjena napetosti in limfatičnemu odtoku. Vidni rezultati.</p>
-                <div class="service-footer">
-                    <span class="service-price">€165</span>
-                    <button class="service-btn" onclick="openUchatzWidget()">→</button>
-                </div>
-            </div>
-        </div>
-        <div class="personal-box">
-            <p data-i18n="services.personal">✨ Pred vsakim tretmajem opravim podrobno pogovor o vaših potrebah. Nisem tu za hitko storitev – sem tu za pravo skrb. Vsakega gosta poznam osebno.</p>
-        </div>
-    </div>
-</main>
-
-<main id="page-about" class="page">
-    <div class="container">
-        <h1 style="font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 3rem;" data-i18n="about.hero">O Meni</h1>
-        <div class="about-grid">
-            <div class="about-text">
-                <h2 data-i18n="about.founder">Anja Humar</h2>
-                <p data-i18n="about.founder.p1">Za mene je lepota bila vedno več kot samo koža. To je tiha samozavest, ki se širi, ko se res počutiš nego. Lumie sem založila, ker sem verjela, da sta osebnost in strokovnost lahko neločljivi.</p>
-                <p data-i18n="about.founder.p2">Z izobrazbo iz napredne estetike in 8+ let izkušenj sem se odločila, da bom delala samo sama. Ne zato, ker sem težka za delo (smehaj), ampak ker želim, da poznate vsakič isto osebo, isto roko, isti pristop. Ni tu zamenjav in površnosti – samo jaz in vaša lepota.</p>
-                <p data-i18n="about.founder.p3">Vsak termin je mini-ritualno doživetje. Veste, kaj boste dobili. In to dobite res od mene, osebno.</p>
-            </div>
-            <div class="about-image">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe8b-5GSfJgPhYqZgrd7uCUFDtpFgCGZY90YObtIyXIgpxpHgx6iEaonJQzN9-Mwo8gMNOzov8D0fws8a9OzjydXyYI1MF1VyJ2LOvQNVXNoZnxMDi4bdHPr28fEAXhz1H3BiDfGNKSdlvLvVDE2pvcLtTD5y3NP5uT4FkJ7ZAb7w6xsaKfIRij_xlsfMoYTzVxG-u04sTx9kEbTFTGlXJmw6X0rg_10waCyh4NIBbk-lJsRg2D9znNioXEK1fhBbUdGjdx-4cm9g" alt="Anja"/>
-            </div>
-        </div>
-        <div class="why-solo">
-            <h2 data-i18n="about.solo.title">Zakaj Sam?</h2>
-            <div class="why-solo-item"><strong data-i18n="about.solo.consistency">Doslednost:</strong> <span data-i18n="about.solo.consistency.text">Vsak tretma je enak. Isto tehniko, isto pozornost, iste rezultate dobite od mene.</span></div>
-            <div class="why-solo-item"><strong data-i18n="about.solo.personal">Osebnost:</strong> <span data-i18n="about.solo.personal.text">Poznate me. Nikoli ne menjam gesta, energije ali pristopa. Sem 100% vedno.</span></div>
-            <div class="why-solo-item"><strong data-i18n="about.solo.quality">Kakovost:</strong> <span data-i18n="about.solo.quality.text">Nisem pod časovnim pritiskom. Vsak tretma je toliko dolg, kolikor je potrebno. Ni hitenja.</span></div>
-        </div>
-        <div class="values-grid">
-            <div class="value-card">
-                <h4 data-i18n="about.values.1.title">Naravno in Etično</h4>
-                <p data-i18n="about.values.1.desc">Samo proizvodi brez okrutnosti in naravni ingredienčni.</p>
-            </div>
-            <div class="value-card">
-                <h4 data-i18n="about.values.2.title">Osebna Skrb</h4>
-                <p data-i18n="about.values.2.desc">Sem tukaj za vas, ne za kvote. Vsak gost je posebna oseba.</p>
-            </div>
-            <div class="value-card">
-                <h4 data-i18n="about.values.3.title">Strokovnost</h4>
-                <p data-i18n="about.values.3.desc">Kontinuirana izobrazba in ljubezen do svoje discipline.</p>
-            </div>
-        </div>
-    </div>
-</main>
-
-<main id="page-contact" class="page">
-    <div class="container">
-        <h1 style="font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 1rem;" data-i18n="contact.title">Kontaktiraj Me</h1>
-        <p style="color: #57423b; font-size: 1.1rem; margin-bottom: 2rem;" data-i18n="contact.desc">Direktno do mene. Brez sekretaric, brez sistematike. Samo Anja.</p>
-        <div class="contact-grid">
-            <div class="contact-form">
-                <h2 data-i18n="contact.form.title">Pošlji Mi Sporočilo</h2>
-                <form id="contactForm">
-                    <div class="form-group"><label data-i18n="contact.form.name">Ime</label><input type="text" placeholder="Tvoje ime" required></div>
-                    <div class="form-group"><label data-i18n="contact.form.email">E-pošta</label><input type="email" placeholder="hello@example.com" required></div>
-                    <div class="form-group"><label data-i18n="contact.form.phone">Telefonska Številka</label><input type="tel" placeholder="+386 40 123 456"></div>
-                    <div class="form-group"><label data-i18n="contact.form.message">Kaj te zanima?</label><textarea placeholder="Povej mi o sebi..." required></textarea></div>
-                    <button type="submit" class="form-submit" data-i18n="contact.form.submit">Pošlji</button>
-                </form>
-            </div>
-            <div class="contact-info">
-                <h3 data-i18n="contact.visit">Obišči Me</h3>
-                <div class="info-item"><div class="info-label" data-i18n="contact.address.label">Naslov</div><div class="info-value">Ankaranska cesta 5a, 6000 Koper, Slovenija</div></div>
-                <div class="info-item"><div class="info-label" data-i18n="contact.hours.label">Delovni Čas</div><div class="info-value"><span data-i18n="contact.hours.weekday">Pon – Pet</span>: 09:00 – 19:00</div></div>
-                <div class="info-item"><div class="info-label" data-i18n="contact.phone.label">Pokličite Samo Mene</div><div class="info-value"><a href="tel:+38640123456">+386 40 123 456</a></div></div>
-                <div class="info-item"><div class="info-label" data-i18n="contact.email.label">E-pošta</div><div class="info-value"><a href="mailto:hello@lumie.si">hello@lumie.si</a></div></div>
-            </div>
-        </div>
-        <div class="personal-box"><p data-i18n="contact.solo.message">Ker sem sama, imam omejene termine. Rezerviraj vnaprej. Ampak ko prihajaš k meni, veš, da ti je čas samo tvoj.</p></div>
-    </div>
-</main>
-
-<main id="page-imprint" class="page">
-    <div class="legal-page">
-        <h1 data-i18n="imprint.title">Impresum</h1>
-        <h2 data-i18n="imprint.business">Podjetje</h2>
-        <p><strong>Lumie Beauty Salon</strong><br/><strong data-i18n="imprint.owner">Lastnik</strong>: Anja Humar<br/><strong data-i18n="imprint.legal">Pravna forma</strong>: s.p.<br/><strong data-i18n="imprint.vat">Davčna številka</strong>: SI PLACEHOLDER</p>
-        <h2 data-i18n="imprint.contact">Kontakt</h2>
-        <p>Ankaranska cesta 5a, 6000 Koper, Slovenija<br/>Tel: +386 40 123 456<br/>Email: hello@lumie.si</p>
-        <h2 data-i18n="imprint.responsible">Odgovorna oseba</h2>
-        <p data-i18n="imprint.responsible.text">Anja Humar je odgovorna oseba za vsebino na tej spletni strani v skladu z zakonodajo Republike Slovenije.</p>
-    </div>
-</main>
-
-<main id="page-privacy" class="page">
-    <div class="legal-page">
-        <h1 data-i18n="privacy.title">Politika Zasebnosti</h1>
-        <h2 data-i18n="privacy.intro.title">Uvod</h2>
-        <p data-i18n="privacy.intro.text">Lumie Beauty Salon se zavezuje k vaši zasebnosti. Ta politika pojasnjuje, kako zbiramo, uporabljamo in varujemo vaše osebne podatke.</p>
-        <h2 data-i18n="privacy.data.title">Zbiranje Podatkov</h2>
-        <p data-i18n="privacy.data.text">Podatke zbiramo samo s pomočjo kontaktnega obrazca. Zbrani podatki vključujejo ime, e-poštni naslov, telefonsko številko in sporočilo. Ti podatki se uporabljajo izključno za odgovor na vaš poizvedek.</p>
-        <h2 data-i18n="privacy.protection.title">Zaščita Podatkov</h2>
-        <p data-i18n="privacy.protection.text">Vaši osebni podatki so varni in se ne razkrij tretjim stranem brez vašega soglasja, razen kot zahteva zakon. Spletna stran uporablja HTTPS za šifriranje podatkov med pošiljanjem.</p>
-        <h2 data-i18n="privacy.rights.title">Vaše Pravice</h2>
-        <p data-i18n="privacy.rights.text">Imate pravico dostopa, popravljanja ali brisanja svojih osebnih podatkov. Za uresničitev teh pravic nas kontaktirajte prek e-pošte na hello@lumie.si.</p>
-    </div>
-</main>
-
-<main id="page-terms" class="page">
-    <div class="legal-page">
-        <h1 data-i18n="terms.title">Pogoji Uporabe</h1>
-        <h2 data-i18n="terms.intro.title">Splošno</h2>
-        <p data-i18n="terms.intro.text">Uporaba te spletne strani pomeni, da se strinjate s temi pogoji uporabe. Če se s pogoji ne strinjate, prosimo, ne uporabljajte te spletne strani.</p>
-        <h2 data-i18n="terms.services.title">Storitve</h2>
-        <p data-i18n="terms.services.text">Storitve so dostopne samo osebam, ki so stare vsaj 18 let. Lumie Beauty Salon si pridržuje pravico do spremembe ali prekinca storitev brez predhodnega obvestila.</p>
-        <h2 data-i18n="terms.liability.title">Odgovornost</h2>
-        <p data-i18n="terms.liability.text">Lumie Beauty Salon ni odgovorna za nobeno škodo, ki bi nastala kot posledica uporabe te spletne strani. Vsa naročila in rezervacije so podvržena našim poslovnim pogojem.</p>
-        <h2 data-i18n="terms.governing.title">Veljavajoče Pravo</h2>
-        <p data-i18n="terms.governing.text">Ti pogoji se urejajo z zakonom Republike Slovenije. Vsi spori so predmet izključne pristojnosti sodišč v Republiki Sloveniji.</p>
-    </div>
-</main>
-
-<footer>
-    <div class="footer-content">
-        <div class="footer-section">
-            <h4>Lumie</h4>
-            <p data-i18n="footer.desc">Intimni prostor lepote in osebne skrb. Samo Anja, samo za vas, samo Lumie.</p>
-        </div>
-        <div class="footer-section">
-            <h4 data-i18n="footer.contact">Kontakt</h4>
-            <p>Ankaranska cesta 5a, Koper<br/><span data-i18n="footer.hours">Odprt: Pon-Pet 9:00-19:00</span><br/>+386 40 123 456</p>
-        </div>
-        <div class="footer-section">
-            <h4 data-i18n="footer.legal">Pravno</h4>
-            <p><a onclick="showPage('imprint')" data-i18n="footer.imprint">Impresum</a><br/><a onclick="showPage('privacy')" data-i18n="footer.privacy">Politika Zasebnosti</a><br/><a onclick="showPage('terms')" data-i18n="footer.terms">Pogoji Uporabe</a></p>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p data-i18n="footer.copyright">© 2026 Lumie Beauty Salon. Vse pravice pridržane.</p>
-    </div>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-stone-100 dark:bg-stone-900 border-t border-outline-variant/10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 px-12 py-16 max-w-7xl mx-auto font-sans text-sm tracking-wide">
+<div>
+<div class="text-xl font-serif text-stone-800 dark:text-stone-200 mb-6">Lumie</div>
+<p class="text-stone-500 dark:text-stone-400 leading-relaxed max-w-xs">
+                    Curating beauty and wellness through thoughtful rituals and expert care in the heart of Koper.
+                </p>
+</div>
+<div class="space-y-4">
+<h5 class="text-emerald-900 dark:text-emerald-500 font-bold uppercase tracking-widest text-xs">Contact</h5>
+<p class="text-stone-500 dark:text-stone-400">Ankaranska cesta 5a, Koper</p>
+<p class="text-stone-500 dark:text-stone-400">Open: Mon-Fri 9:00-19:00</p>
+<p class="text-stone-500 dark:text-stone-400">+386 40 123 456</p>
+</div>
+<div class="space-y-4">
+<h5 class="text-emerald-900 dark:text-emerald-500 font-bold uppercase tracking-widest text-xs">Follow Us</h5>
+<div class="flex flex-col gap-2">
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline transition-all" href="#">Instagram</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline transition-all" href="#">Facebook</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-12 py-8 border-t border-outline-variant/5 text-center md:text-left">
+<p class="text-stone-500 dark:text-stone-400 text-xs">© 2024 Lumie Beauty Salon. All rights reserved.</p>
+</div>
 </footer>
+</body></html>
 
+<!-- Lumie - Services & Pricing -->
+<!DOCTYPE html>
 
-<script>
-const translations = {
-  sl: { 'nav.home': 'Dom', 'nav.services': 'Storitve', 'nav.about': 'O meni', 'nav.contact': 'Kontakt', 'nav.book': 'Rezerviraj', 'home.hero.radiant': 'Umetnost', 'home.hero.desc': 'Stopite v intimni prostor, kjer se klinična natančnost sreča z osebno nego. Doživite vrhunske lepotne tretmaje, zasnovane za razkritje vašega najbolj žarečega jaza.', 'home.personal.title': 'Samo Mene, Samo Za Vas', 'home.personal.intro': 'Sem Anja, lasnica Lumie. Vsak termin vodim osebno jaz – zato poznate vsakič isto osebo, iste roke in isto strokovno znanje. Tukaj ni timov, samo individualna pozornost in resna skrb za vašo lepoto.', 'home.explore': 'Raziskuj Storitve', 'home.reserve': 'Rezerviraj Zdaj', 'home.cta.title': 'Pripravljen/a za transformacijo?', 'home.cta.desc': 'Mesta se hitro napolnijo. Pošlji mi sporočilo ali pokliči.', 'home.cta.button': 'Rezerviraj Zdaj', 'services.title': 'Meni Storitev', 'services.desc': 'Specializiram se na vrhunske obdelave obraza in nege kože. Vsaka storitev je prilagojena vašim potrebam.', 'services.facial1.name': 'Lumie Sij Facial', 'services.facial1.desc': '60 min — Dvojno čiščenje, encimski peeling, infuzija kisika in hladilna maska. Popoln reset za vašo kožo.', 'services.facial2.name': 'Oblikuj in Dvigni', 'services.facial2.desc': '75 min — Globinska masaža obraza, namenjena napetosti in limfatičnemu odtoku. Vidni rezultati.', 'services.personal': '✨ Pred vsakim tretmajem opravim podrobno pogovor o vaših potrebah. Nisem tu za hitko storitev – sem tu za pravo skrb. Vsakega gosta poznam osebno.', 'about.hero': 'O Meni', 'about.founder': 'Anja Humar', 'about.founder.p1': 'Za mene je lepota bila vedno več kot samo koža. To je tiha samozavest, ki se širi, ko se res počutiš nego. Lumie sem ustanovila, ker sem verjela, da sta osebnost in strokovnost lahko neločljivi.', 'about.founder.p2': 'Z izobrazbo iz napredne estetike in 8+ let izkušenj sem se odločila, da bom delala samo sama. Ne zato, ker sem težka za delo (smehaj), ampak ker želim, da poznate vsakič isto osebo, isto roko, isti pristop. Ni tu zamenjav in površnosti – samo jaz in vaša lepota.', 'about.founder.p3': 'Vsak termin je mini-ritualno doživetje. Veste, kaj boste dobili. In to dobite res od mene, osebno.', 'about.solo.title': 'Zakaj Sam?', 'about.solo.consistency': 'Doslednost:', 'about.solo.consistency.text': 'Vsak tretma je enak. Isto tehniko, isto pozornost, iste rezultate dobite od mene.', 'about.solo.personal': 'Osebnost:', 'about.solo.personal.text': 'Poznate me. Nikoli ne menjam gesta, energije ali pristopa. Sem 100% vedno.', 'about.solo.quality': 'Kakovost:', 'about.solo.quality.text': 'Nisem pod časovnim pritiskom. Vsak tretma je toliko dolg, kolikor je potrebno. Ni hitenja.', 'about.values.1.title': 'Naravno in Etično', 'about.values.1.desc': 'Samo proizvodi brez okrutnosti in naravni ingredienčni.', 'about.values.2.title': 'Osebna Skrb', 'about.values.2.desc': 'Sem tukaj za vas, ne za kvote. Vsak gost je posebna oseba.', 'about.values.3.title': 'Strokovnost', 'about.values.3.desc': 'Kontinuirana izobrazba in ljubezen do svoje discipline.', 'contact.title': 'Kontaktiraj Me', 'contact.desc': 'Direktno do mene. Brez sekretaric, brez sistematike. Samo Anja.', 'contact.form.title': 'Pošlji Mi Sporočilo', 'contact.form.name': 'Ime', 'contact.form.email': 'E-pošta', 'contact.form.phone': 'Telefonska Številka', 'contact.form.message': 'Kaj te zanima?', 'contact.form.submit': 'Pošlji', 'contact.visit': 'Obišči Me', 'contact.address.label': 'Naslov', 'contact.hours.label': 'Delovni Čas', 'contact.hours.weekday': 'Pon – Pet', 'contact.phone.label': 'Pokličite Samo Mene', 'contact.email.label': 'E-pošta', 'contact.solo.message': 'Ker sem sama, imam omejene termine. Rezerviraj vnaprej. Ampak ko prihajaš k meni, veš, da ti je čas samo tvoj.', 'imprint.title': 'Impresum', 'imprint.business': 'Podjetje', 'imprint.owner': 'Lastnik', 'imprint.legal': 'Pravna forma', 'imprint.vat': 'Davčna številka', 'imprint.contact': 'Kontakt', 'imprint.responsible': 'Odgovorna oseba', 'imprint.responsible.text': 'Anja Humar je odgovorna oseba za vsebino na tej spletni strani v skladu z zakonodajo Republike Slovenije.', 'privacy.title': 'Politika Zasebnosti', 'privacy.intro.title': 'Uvod', 'privacy.intro.text': 'Lumie Beauty Salon se zavezuje k vaši zasebnosti. Ta politika pojasnjuje, kako zbiramo, uporabljamo in varujemo vaše osebne podatke.', 'privacy.data.title': 'Zbiranje Podatkov', 'privacy.data.text': 'Podatke zbiramo samo s pomočjo kontaktnega obrazca. Zbrani podatki vključujejo ime, e-poštni naslov, telefonsko številko in sporočilo. Ti podatki se uporabljajo izključno za odgovor na vaš poizvedek.', 'privacy.protection.title': 'Zaščita Podatkov', 'privacy.protection.text': 'Vaši osebni podatki so varni in se ne razkrij tretjim stranem brez vašega soglasja, razen kot zahteva zakon. Spletna stran uporablja HTTPS za šifriranje podatkov med pošiljanjem.', 'privacy.rights.title': 'Vaše Pravice', 'privacy.rights.text': 'Imate pravico dostopa, popravljanja ali brisanja svojih osebnih podatkov. Za uresničitev teh pravic nas kontaktirajte prek e-pošte na hello@lumie.si.', 'terms.title': 'Pogoji Uporabe', 'terms.intro.title': 'Splošno', 'terms.intro.text': 'Uporaba te spletne strani pomeni, da se strinjate s temi pogoji uporabe. Če se s pogoji ne strinjate, prosimo, ne uporabljajte te spletne strani.', 'terms.services.title': 'Storitve', 'terms.services.text': 'Storitve so dostopne samo osebam, ki so stare vsaj 18 let. Lumie Beauty Salon si pridržuje pravico do spremembe ali prekinca storitev brez predhodnega obvestila.', 'terms.liability.title': 'Odgovornost', 'terms.liability.text': 'Lumie Beauty Salon ni odgovorna za nobeno škodo, ki bi nastala kot posledica uporabe te spletne strani. Vsa naročila in rezervacije so podvržena našim poslovnim pogojem.', 'terms.governing.title': 'Veljavajoče Pravo', 'terms.governing.text': 'Ti pogoji se urejajo z zakonom Republike Slovenije. Vsi spori so predmet izključne pristojnosti sodišč v Republiki Sloveniji.', 'footer.desc': 'Intimni prostor lepote in osebne skrb. Samo Anja, samo za vas, samo Lumie.', 'footer.contact': 'Kontakt', 'footer.hours': 'Odprt: Pon-Pet 9:00-19:00', 'footer.legal': 'Pravno', 'footer.imprint': 'Impresum', 'footer.privacy': 'Politika Zasebnosti', 'footer.terms': 'Pogoji Uporabe', 'footer.copyright': '© 2026 Lumie Beauty Salon. Vse pravice pridržane.' },
-  en: { 'nav.home': 'Home', 'nav.services': 'Services', 'nav.about': 'About', 'nav.contact': 'Contact', 'nav.book': 'Book', 'home.hero.radiant': 'The Art of', 'home.hero.desc': 'Step into an intimate space where clinical precision meets personal care. Experience high-end beauty treatments designed to unveil your most luminous self.', 'home.personal.title': 'Just Me, Just For You', 'home.personal.intro': 'I\'m Anja, owner of Lumie. Every appointment is personally led by me – so you always get the same person, same hands, same expertise. No teams, no corporate approach. Just individual attention and genuine care for your beauty.', 'home.explore': 'Explore Services', 'home.reserve': 'Book Now', 'home.cta.title': 'Ready for Your Transformation?', 'home.cta.desc': 'Spots fill quickly. Send me a message or give me a call.', 'home.cta.button': 'Book Now', 'services.title': 'Service Menu', 'services.desc': 'I specialize in premium facial treatments and skincare. Every service is tailored to your unique needs.', 'services.facial1.name': 'Lumie Glow Facial', 'services.facial1.desc': '60 min — Double cleanse, enzyme peel, oxygen infusion, and cooling mask. A complete reset for your skin.', 'services.facial2.name': 'Sculpt & Lift', 'services.facial2.desc': '75 min — Deep tissue facial massage targeting tension and lymphatic drainage. Visible results.', 'services.personal': '✨ Before every treatment, I have a detailed conversation about your needs. I\'m not here for quick treatments – I\'m here for real care. I know every guest personally.', 'about.hero': 'About Me', 'about.founder': 'Anja Humar', 'about.founder.p1': 'Beauty has always been more than skin to me. It\'s the quiet confidence that radiates when you truly feel cared for. I founded Lumie because I believed that personal touch and expertise could go hand in hand.', 'about.founder.p2': 'With a background in advanced aesthetics and 8+ years of experience, I decided to work solo. Not because I\'m difficult (smile), but because I want you to know that every time you come in, it\'s the same person, the same hands, the same approach. No substitutes, no superficiality – just me and your beauty.', 'about.founder.p3': 'Every appointment is a mini-ritual. You know what you\'re getting. And you get it directly from me, in person.', 'about.solo.title': 'Why Solo?', 'about.solo.consistency': 'Consistency:', 'about.solo.consistency.text': 'Every treatment is the same. Same technique, same attention, same results – always from me.', 'about.solo.personal': 'Personal:', 'about.solo.personal.text': 'You know me. I never change my energy or approach. I\'m 100% present, always.', 'about.solo.quality': 'Quality:', 'about.solo.quality.text': 'I\'m not under time pressure. Each treatment takes as long as it needs. No rushing.', 'about.values.1.title': 'Natural & Ethical', 'about.values.1.desc': 'Only cruelty-free products with natural ingredients.', 'about.values.2.title': 'Personal Care', 'about.values.2.desc': 'I\'m here for you, not for quotas. Every guest is a unique person.', 'about.values.3.title': 'Expertise', 'about.values.3.desc': 'Continuous learning and genuine passion for what I do.', 'contact.title': 'Contact Me', 'contact.desc': 'Directly to me. No receptionists, no bureaucracy. Just Anja.', 'contact.form.title': 'Send Me a Message', 'contact.form.name': 'Name', 'contact.form.email': 'Email', 'contact.form.phone': 'Phone Number', 'contact.form.message': 'What interests you?', 'contact.form.submit': 'Send', 'contact.visit': 'Visit Me', 'contact.address.label': 'Address', 'contact.hours.label': 'Opening Hours', 'contact.hours.weekday': 'Mon – Fri', 'contact.phone.label': 'Call Me Directly', 'contact.email.label': 'Email', 'contact.solo.message': 'Because I work alone, spots are limited. Book ahead. But when you come to me, you know your time is exclusively yours.', 'imprint.title': 'Imprint', 'imprint.business': 'Business Information', 'imprint.owner': 'Owner', 'imprint.legal': 'Legal Form', 'imprint.vat': 'VAT Number', 'imprint.contact': 'Contact', 'imprint.responsible': 'Responsible Person', 'imprint.responsible.text': 'Anja Humar is the responsible person for the content of this website in accordance with the laws of the Republic of Slovenia.', 'privacy.title': 'Privacy Policy', 'privacy.intro.title': 'Introduction', 'privacy.intro.text': 'Lumie Beauty Salon is committed to your privacy. This policy explains how we collect, use, and protect your personal data.', 'privacy.data.title': 'Data Collection', 'privacy.data.text': 'We collect data only through the contact form. Collected data includes name, email address, phone number, and message. This data is used exclusively to respond to your inquiry.', 'privacy.protection.title': 'Data Protection', 'privacy.protection.text': 'Your personal data is secure and will not be disclosed to third parties without your consent, except as required by law. The website uses HTTPS to encrypt data during transmission.', 'privacy.rights.title': 'Your Rights', 'privacy.rights.text': 'You have the right to access, correct, or delete your personal data. To exercise these rights, contact us via email at hello@lumie.si.', 'terms.title': 'Terms of Use', 'terms.intro.title': 'General', 'terms.intro.text': 'Use of this website means you agree to these terms of use. If you do not agree with the terms, please do not use this website.', 'terms.services.title': 'Services', 'terms.services.text': 'Services are available only to persons aged 18 and over. Lumie Beauty Salon reserves the right to modify or discontinue services without notice.', 'terms.liability.title': 'Liability', 'terms.liability.text': 'Lumie Beauty Salon is not responsible for any damage resulting from the use of this website. All bookings and reservations are subject to our business terms.', 'terms.governing.title': 'Governing Law', 'terms.governing.text': 'These terms are governed by the law of the Republic of Slovenia. All disputes are subject to the exclusive jurisdiction of the courts in the Republic of Slovenia.', 'footer.desc': 'An intimate space of beauty and personal care. Just Anja, just for you, just Lumie.', 'footer.contact': 'Contact', 'footer.hours': 'Open: Mon-Fri 9:00-19:00', 'footer.legal': 'Legal', 'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy Policy', 'footer.terms': 'Terms of Use', 'footer.copyright': '© 2026 Lumie Beauty Salon. All rights reserved.' },
-  it: { 'nav.home': 'Home', 'nav.services': 'Servizi', 'nav.about': 'Chi Sono', 'nav.contact': 'Contatti', 'nav.book': 'Prenota', 'home.hero.radiant': 'L\'Arte dello', 'home.hero.desc': 'Entra in uno spazio intimo dove la precisione clinica incontra l\'attenzione personale. Sperimenta trattamenti di bellezza premium progettati per rivelare il tuo io più luminoso.', 'home.personal.title': 'Solo Io, Solo Per Te', 'home.personal.intro': 'Sono Anja, proprietaria di Lumie. Ogni appuntamento è condotto personalmente da me – quindi incontri sempre la stessa persona, le stesse mani, la stessa competenza. Nessun team, nessun approccio generico. Solo attenzione individuale e vera cura per la tua bellezza.', 'home.explore': 'Esplora i Servizi', 'home.reserve': 'Prenota Ora', 'home.cta.title': 'Pronto per la Tua Trasformazione?', 'home.cta.desc': 'I posti si riempiono velocemente. Inviami un messaggio o chiamami.', 'home.cta.button': 'Prenota Ora', 'services.title': 'Menu Servizi', 'services.desc': 'Mi specializzo in trattamenti viso premium e cura della pelle. Ogni servizio è adattato alle tue esigenze uniche.', 'services.facial1.name': 'Lumie Glow Facial', 'services.facial1.desc': '60 min — Doppia pulizia, peeling enzimatico, infusione di ossigeno e maschera rinfrescante. Un reset completo per la tua pelle.', 'services.facial2.name': 'Sculpt & Lift', 'services.facial2.desc': '75 min — Massaggio facciale profondo che mira alla tensione e al drenaggio linfatico. Risultati visibili.', 'services.personal': '✨ Prima di ogni trattamento, ho una conversazione dettagliata sulle tue esigenze. Non sono qui per trattamenti veloci – sono qui per vera cura. Conosco ogni cliente personalmente.', 'about.hero': 'Chi Sono', 'about.founder': 'Anja Humar', 'about.founder.p1': 'La bellezza è sempre stata più che solo pelle per me. È la fiducia tranquilla che brilla quando ti senti veramente curato. Ho fondato Lumie perché credevo che il tocco personale e l\'esperienza potessero andare di pari passo.', 'about.founder.p2': 'Con una formazione in estetica avanzata e 8+ anni di esperienza, ho deciso di lavorare da sola. Non perché sono difficile (sorridimi), ma perché voglio che sai che ogni volta che vieni, incontri la stessa persona, le stesse mani, lo stesso approccio. Niente sostituzioni, niente superficialità – solo io e la tua bellezza.', 'about.founder.p3': 'Ogni appuntamento è un mini-rituale. Sai cosa otterrai. E lo ottieni direttamente da me, di persona.', 'about.solo.title': 'Perché Da Sola?', 'about.solo.consistency': 'Coerenza:', 'about.solo.consistency.text': 'Ogni trattamento è lo stesso. Stessa tecnica, stessa attenzione, stessi risultati – sempre da me.', 'about.solo.personal': 'Personale:', 'about.solo.personal.text': 'Mi conosci. Non cambio mai la mia energia o approccio. Sono 100% presente, sempre.', 'about.solo.quality': 'Qualità:', 'about.solo.quality.text': 'Non sono sotto pressione di tempo. Ogni trattamento richiede il tempo necessario. Niente fretta.', 'about.values.1.title': 'Naturale e Etico', 'about.values.1.desc': 'Solo prodotti cruelty-free con ingredienti naturali.', 'about.values.2.title': 'Cura Personale', 'about.values.2.desc': 'Sono qui per te, non per quote. Ogni cliente è una persona unica.', 'about.values.3.title': 'Esperienza', 'about.values.3.desc': 'Apprendimento continuo e vera passione per quello che faccio.', 'contact.title': 'Contattami', 'contact.desc': 'Direttamente a me. Nessun segretario, nessuna burocrazia. Solo Anja.', 'contact.form.title': 'Inviami un Messaggio', 'contact.form.name': 'Nome', 'contact.form.email': 'Email', 'contact.form.phone': 'Numero di Telefono', 'contact.form.message': 'Cosa ti interessa?', 'contact.form.submit': 'Invia', 'contact.visit': 'Visitami', 'contact.address.label': 'Indirizzo', 'contact.hours.label': 'Orari di Apertura', 'contact.hours.weekday': 'Lun – Ven', 'contact.phone.label': 'Chiamami Direttamente', 'contact.email.label': 'Email', 'contact.solo.message': 'Perché lavoro da sola, i posti sono limitati. Prenota in anticipo. Ma quando vieni da me, sai che il tuo tempo è esclusivamente tuo.', 'imprint.title': 'Impronta', 'imprint.business': 'Informazioni Aziendali', 'imprint.owner': 'Proprietario', 'imprint.legal': 'Forma Legale', 'imprint.vat': 'Numero di IVA', 'imprint.contact': 'Contatti', 'imprint.responsible': 'Persona Responsabile', 'imprint.responsible.text': 'Anja Humar è la persona responsabile dei contenuti di questo sito web in conformità alle leggi della Repubblica di Slovenia.', 'privacy.title': 'Politica sulla Privacy', 'privacy.intro.title': 'Introduzione', 'privacy.intro.text': 'Lumie Beauty Salon è impegnata nella tua privacy. Questa politica spiega come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.', 'privacy.data.title': 'Raccolta Dati', 'privacy.data.text': 'Raccogliamo dati solo attraverso il modulo di contatto. I dati raccolti includono nome, indirizzo email, numero di telefono e messaggio. Questi dati vengono utilizzati esclusivamente per rispondere alla tua richiesta.', 'privacy.protection.title': 'Protezione Dati', 'privacy.protection.text': 'I tuoi dati personali sono protetti e non verranno divulgati a terzi senza il tuo consenso, se non richiesto dalla legge. Il sito utilizza HTTPS per crittografare i dati durante la trasmissione.', 'privacy.rights.title': 'I Tuoi Diritti', 'privacy.rights.text': 'Hai il diritto di accedere, correggere o eliminare i tuoi dati personali. Per esercitare questi diritti, contattaci via email all\'indirizzo hello@lumie.si.', 'terms.title': 'Termini di Utilizzo', 'terms.intro.title': 'Generale', 'terms.intro.text': 'L\'utilizzo di questo sito web significa che accetti questi termini di utilizzo. Se non sei d\'accordo con i termini, non utilizzare questo sito web.', 'terms.services.title': 'Servizi', 'terms.services.text': 'I servizi sono disponibili solo per le persone di età pari o superiore a 18 anni. Lumie Beauty Salon si riserva il diritto di modificare o interrompere i servizi senza preavviso.', 'terms.liability.title': 'Responsabilità', 'terms.liability.text': 'Lumie Beauty Salon non è responsabile per alcun danno derivante dall\'uso di questo sito web. Tutte le prenotazioni sono soggette ai nostri termini commerciali.', 'terms.governing.title': 'Legge Applicabile', 'terms.governing.text': 'Questi termini sono disciplinati dalla legge della Repubblica di Slovenia. Tutte le controversie sono soggette alla giurisdizione esclusiva dei tribunali della Repubblica di Slovenia.', 'footer.desc': 'Uno spazio intimo di bellezza e cura personale. Solo Anja, solo per te, solo Lumie.', 'footer.contact': 'Contatti', 'footer.hours': 'Aperto: Lun-Ven 9:00-19:00', 'footer.legal': 'Legale', 'footer.imprint': 'Impronta', 'footer.privacy': 'Politica sulla Privacy', 'footer.terms': 'Termini di Utilizzo', 'footer.copyright': '© 2026 Lumie Beauty Salon. Tutti i diritti riservati.' }
-};
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumie Beauty Salon | Ethereal Editorial Beauty</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "surface": "#faf9f6",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dbdad7",
+                    "on-secondary-container": "#4b6a4f",
+                    "surface-variant": "#e3e2e0",
+                    "secondary-fixed": "#c8ebca",
+                    "outline-variant": "#dec0b6",
+                    "on-tertiary-fixed": "#1f1b14",
+                    "on-tertiary-fixed-variant": "#4c463e",
+                    "surface-container-highest": "#e3e2e0",
+                    "surface-container-high": "#e9e8e5",
+                    "on-primary-container": "#6c2000",
+                    "primary": "#a43c12",
+                    "surface-bright": "#faf9f6",
+                    "outline": "#8b7169",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#adcfaf",
+                    "inverse-surface": "#2f312f",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f2f1ee",
+                    "on-surface-variant": "#57423b",
+                    "on-secondary-fixed": "#03210c",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#ff7f50",
+                    "primary-fixed-dim": "#ffb59c",
+                    "inverse-primary": "#ffb59c",
+                    "tertiary-container": "#aba399",
+                    "on-tertiary-container": "#3f3932",
+                    "on-primary-fixed": "#380c00",
+                    "tertiary-fixed": "#ebe1d6",
+                    "on-secondary-fixed-variant": "#304d35",
+                    "on-primary-fixed-variant": "#822800",
+                    "background": "#faf9f6",
+                    "secondary": "#47664b",
+                    "primary-fixed": "#ffdbcf",
+                    "surface-tint": "#a43c12",
+                    "on-surface": "#1a1c1a",
+                    "surface-container-low": "#f4f3f1",
+                    "secondary-container": "#c6e9c7",
+                    "surface-container": "#efeeeb",
+                    "tertiary": "#645d55",
+                    "tertiary-fixed-dim": "#cec5bb",
+                    "on-background": "#1a1c1a",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f6; }
+        .font-serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hero-gradient { background: linear-gradient(135deg, #a43c12 0%, #ff7f50 100%); }
+        .ghost-border { outline: 1px solid rgba(222, 192, 182, 0.15); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-serif italic text-stone-900 dark:text-stone-50">Lumie</div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="font-serif tracking-tight text-orange-800 dark:text-orange-400 font-bold border-b-2 border-orange-800 dark:border-orange-400 pb-1" href="#">Home</a>
+<a class="font-serif tracking-tight text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Services</a>
+<a class="font-serif tracking-tight text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">About</a>
+<a class="font-serif tracking-tight text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Booking</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-2.5 rounded-full font-medium tracking-wide hover:opacity-80 transition-all active:scale-95">
+                Book Now
+            </button>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-8 lg:px-12 py-12 lg:py-20 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-6 z-10">
+<h1 class="text-5xl lg:text-7xl font-serif tracking-tight text-on-surface leading-[1.1] mb-8">
+                        The Art of <br/><span class="italic text-primary">Radiant</span> Beauty
+                    </h1>
+<p class="text-lg text-on-surface-variant max-w-md mb-10 leading-relaxed">
+                        Step into a sanctuary where clinical precision meets ethereal artistry. Experience high-end beauty treatments designed to unveil your most luminous self.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="hero-gradient text-on-primary px-10 py-4 rounded-full text-lg font-semibold hover:shadow-lg transition-all active:scale-95">
+                            Explore Services
+                        </button>
+<button class="bg-surface-container-highest text-on-surface px-10 py-4 rounded-full text-lg font-semibold hover:bg-surface-container-high transition-all">
+                            View Gallery
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-6 relative">
+<div class="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl z-0">
+<img class="w-full h-full object-cover" data-alt="Close-up of a woman with glowing skin and ethereal makeup, soft warm lighting, editorial beauty photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6AaizB2jVEJO0C9MQxk50i-2Ehv_Cu5-OeJ7Go4ZEw0ITnVDnETAS2gouMKuLvkpmeS_MEYcCvCjLc_7nYfHq4KWqeGcG0jLz6O5tHSIc-z1RW0T7xcxl8v-8CaCZBKrL6MkLe5S6RO4PwBqkUGEXd705aVyVANmqbg91RwD5cE4CQAdVQfypnZmIPgin-wvyjn7I4nfSwF53QXNUtntXG0fjWVc9lL0ZOIgw5caz7zjrYoch5AZSSgioqAt71cDbP3b7mhEXHUM"/>
+</div>
+<!-- Decorative Floating Element -->
+<div class="absolute -bottom-10 -left-10 bg-surface-container-lowest p-8 rounded-2xl shadow-xl max-w-xs ghost-border hidden md:block">
+<span class="text-primary material-symbols-outlined text-4xl mb-4">colors_spark</span>
+<p class="text-sm font-medium italic font-serif text-on-surface-variant">"True beauty is an light that radiates from within."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Founder / Welcome Message -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8 lg:px-12">
+<div class="flex flex-col lg:flex-row items-center gap-16">
+<div class="w-full lg:w-1/3">
+<div class="rounded-3xl overflow-hidden aspect-[3/4] shadow-lg">
+<img class="w-full h-full object-cover" data-alt="Professional portrait of Anja Humar, a young female beauty therapist, smiling warmly in a bright modern salon setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4SuznS78blk58lzqZbfBldTKrqI7JmWUHUHIYOaOguQbmJi_MT6m9G4FrYSzMoGhKJKCiivfQxO2tNibRjkH73h7djr8yP__V-gx14sywFgv_kNEh6MGJA1hg88h4XY_f-2iMNIuG093czgTp3HnG5OHKPanYVfei5TOmv1wOYcxK418HnW_GIRx2glwpFAErBbwdYZv-p-EF2rBKuysIcFOsTsqsvdcLbh0hKISkJgTxoqWi6qKPjYw7UBG8qiNJzoPYT8aTPrQ"/>
+</div>
+</div>
+<div class="w-full lg:w-2/3">
+<h2 class="text-secondary text-sm font-bold tracking-[0.2em] uppercase mb-4">Meet the Founder</h2>
+<h3 class="text-4xl lg:text-5xl font-serif mb-8 text-on-surface">A message from <span class="italic">Anja Humar</span></h3>
+<div class="space-y-6 text-on-surface-variant text-lg leading-relaxed max-w-2xl">
+<p>Welcome to Lumie. My journey in the beauty industry has always been driven by a singular passion: creating a space where every guest feels truly seen and celebrated.</p>
+<p>Here at Lumie, we don't just follow trends—we curate experiences that align with your unique essence. Our philosophy combines advanced technical expertise with a deeply personal, welcoming touch.</p>
+<p>Whether you're here for a transformative facial or a styling session, our goal is for you to leave feeling renewed, confident, and luminous.</p>
+</div>
+<div class="mt-10">
+<img class="h-16 opacity-30 grayscale contrast-125" data-alt="Elegant handwritten signature of Anja Humar on a white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOug28eHLMntmKa802E1H5soW_9jos0DdYUs0YuDxMWJ_r5WtWOZKgRruzVf2CpeS8z8fsOkEBhwWPj2aX7pLkkmeYJouWQ8vK4gHHvEh63-0S_jqDo-iaeLAT2mTKVmqNGiDct0qoVscqp8i6wzGpa9eBpes2eTiB7T4AAtBcZ03_4jj9TivXF6GrnGwd9tlsrjKBYAxZCWHil6Kth8_C-ow_ywFO_1g8EwfjYgzncchGCETW0LyThG4Bch8EtNuTwI3emuzh7eA"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Service Mosaic -->
+<section class="py-32 px-8 lg:px-12 max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<h2 class="text-secondary text-sm font-bold tracking-[0.2em] uppercase mb-4">Our Services</h2>
+<h3 class="text-4xl lg:text-5xl font-serif text-on-surface">Signature Treatments</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-full md:h-[800px]">
+<!-- Large Image Tile -->
+<div class="md:col-span-7 md:row-span-2 rounded-3xl overflow-hidden relative group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Luxury facial treatment being performed in a serene spa, close-up of face and professional hands" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_UYbL8XIju3Tu7JN_BvftETi_PlLdax_Qs6qNNojDiibWg-pCdGfD4oQqOekAZcaIZrnhDkPUYpV4s2vZa35_IciFro10mmT_KyGVpnLEdey_wTxSKwPyCoPmfNrMHSDqZGHtYJA_f8sk7_rasu9ELQLNhu5QXKZJbUUOWTnvAzaKG-PCaomqgKQB8dmlAmzHzuQiSb0eNTP-9iSjJiCQA42aSwlRSxY73qsKNlQnTz68wQZfU0peZZKZwy2KaZRny7KwCkta2zA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent flex flex-col justify-end p-10">
+<h4 class="text-on-primary text-3xl font-serif mb-2">Advanced Facials</h4>
+<p class="text-on-primary/80 max-w-xs mb-6">Restorative skin therapies tailored to your unique biology.</p>
+<a class="text-on-primary flex items-center gap-2 font-medium" href="#">
+                            Explore Treatment <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+</div>
+<!-- Color Tile 1 -->
+<div class="md:col-span-5 bg-secondary-container rounded-3xl p-10 flex flex-col justify-between group">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">content_cut</span>
+<h4 class="text-on-secondary-container text-2xl font-serif mb-4">Precision Styling</h4>
+<p class="text-on-secondary-container/70 leading-relaxed">Contemporary hair design that complements your facial structure and lifestyle.</p>
+</div>
+<a class="text-secondary font-bold group-hover:underline transition-all" href="#">Book Stylist</a>
+</div>
+<!-- Color Tile 2 -->
+<div class="md:col-span-5 bg-primary-fixed rounded-3xl p-10 flex flex-col justify-between group">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-6">magic_button</span>
+<h4 class="text-on-primary-fixed text-2xl font-serif mb-4">Lash &amp; Brow Art</h4>
+<p class="text-on-primary-fixed-variant/70 leading-relaxed">Subtle enhancements that define and frame your natural beauty with precision.</p>
+</div>
+<a class="text-primary font-bold group-hover:underline transition-all" href="#">See Options</a>
+</div>
+</div>
+</section>
+<!-- Philosophy / Call to Action -->
+<section class="py-32 bg-stone-900 text-on-primary relative overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-primary/10 blur-[120px] rounded-full translate-x-1/2"></div>
+<div class="max-w-4xl mx-auto px-8 text-center relative z-10">
+<span class="material-symbols-outlined text-primary-container text-5xl mb-8" data-weight="fill">flare</span>
+<h2 class="text-4xl lg:text-6xl font-serif mb-8 leading-tight">Ready to begin your <br/><span class="italic text-primary-container">Luminous</span> transformation?</h2>
+<p class="text-xl text-stone-400 mb-12 font-light leading-relaxed">
+                    Experience the pinnacle of boutique beauty. Our calendar fills quickly—reserve your moment of serenity today at our Koper sanctuary.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-6">
+<button class="bg-primary text-on-primary px-12 py-5 rounded-full text-lg font-bold hover:scale-105 transition-transform active:scale-95">
+                        Book Your Appointment
+                    </button>
+<button class="border border-stone-700 text-on-primary px-12 py-5 rounded-full text-lg font-bold hover:bg-stone-800 transition-colors">
+                        Call the Salon
+                    </button>
+</div>
+</div>
+</section>
+<!-- Location Information -->
+<section class="py-24 max-w-7xl mx-auto px-8 lg:px-12">
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm ghost-border flex flex-col lg:flex-row">
+<div class="lg:w-1/2 p-12 lg:p-20">
+<h3 class="text-3xl font-serif mb-8">Find Us in Koper</h3>
+<div class="space-y-8">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<div>
+<p class="font-bold mb-1">Address</p>
+<p class="text-on-surface-variant">Ankaranska cesta 5a<br/>6000 Koper, Slovenia</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<div>
+<p class="font-bold mb-1">Opening Hours</p>
+<p class="text-on-surface-variant">Monday – Friday: 09:00 – 19:00<br/>Saturday &amp; Sunday: Closed</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 h-[400px] lg:h-auto min-h-[400px]">
+<!-- Map Placeholder Image -->
+<img class="w-full h-full object-cover grayscale opacity-80" data-alt="Stylized map showing the location of Lumie Beauty Salon in Koper, Slovenia, minimal design style" data-location="Koper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEqSc6fTsJIkhl8cCoRWieQRLdh6einnxvFEloh60YDnSaAhjiHIVDry7g7955yobRVOr4kMlqlYzxIOaDmQCSclV56Go_rUt-G4kmpLRa1_vHP2ocG5kewmNGDlY80HrszwOv6Nss2YwLkx45HDGJeninaiuSZEX9LRRfhOb13BLJxxuEba6zfYAMQQeF8ePGUa7LVY9MJ9bmdXuONA4nMAYBjuCAwk7qNsaI2htequP3XbOrsi5AzR4N2q4yybYWVg7IkPDw7rA"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 bg-stone-100 dark:bg-stone-900">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 px-12 py-16 max-w-7xl mx-auto">
+<div class="flex flex-col gap-6">
+<span class="text-xl font-serif text-stone-800 dark:text-stone-200">Lumie</span>
+<p class="font-sans text-sm tracking-wide text-stone-500 dark:text-stone-400 max-w-xs leading-relaxed">
+                    Sophisticated beauty services in the heart of Koper. Elevating your natural radiance through expert care and artistic vision.
+                </p>
+</div>
+<div class="flex flex-col gap-4">
+<p class="font-sans text-sm tracking-wide text-emerald-900 dark:text-emerald-500 font-bold uppercase mb-2">Quick Links</p>
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline transition-all" href="#">Ankaranska cesta 5a, Koper</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline transition-all" href="#">Open: Mon-Fri 9:00-19:00</a>
+</div>
+<div class="flex flex-col gap-4">
+<p class="font-sans text-sm tracking-wide text-emerald-900 dark:text-emerald-500 font-bold uppercase mb-2">Connect</p>
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline transition-all" href="#">Instagram</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline transition-all" href="#">Facebook</a>
+</div>
+</div>
+<div class="px-12 py-8 max-w-7xl mx-auto border-t border-stone-200/50 dark:border-stone-800/50 flex justify-between items-center">
+<p class="font-sans text-xs tracking-wide text-stone-400">© 2024 Lumie Beauty Salon. All rights reserved.</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-stone-300 text-lg">payments</span>
+<span class="material-symbols-outlined text-stone-300 text-lg">eco</span>
+<span class="material-symbols-outlined text-stone-300 text-lg">verified</span>
+</div>
+</div>
+</footer>
+</body></html>
 
-let currentLanguage = 'sl';
+<!-- Lumie - Home -->
+<!DOCTYPE html>
 
-function setLanguage(lang) {
-  currentLanguage = lang;
-  localStorage.setItem('lumie-lang', lang);
-  document.documentElement.lang = lang;
-  document.getElementById('langSelect').value = lang;
-  updateTranslations();
-}
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Booking &amp; Contact | Lumie</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "surface": "#faf9f6",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dbdad7",
+                    "on-secondary-container": "#4b6a4f",
+                    "surface-variant": "#e3e2e0",
+                    "secondary-fixed": "#c8ebca",
+                    "outline-variant": "#dec0b6",
+                    "on-tertiary-fixed": "#1f1b14",
+                    "on-tertiary-fixed-variant": "#4c463e",
+                    "surface-container-highest": "#e3e2e0",
+                    "surface-container-high": "#e9e8e5",
+                    "on-primary-container": "#6c2000",
+                    "primary": "#a43c12",
+                    "surface-bright": "#faf9f6",
+                    "outline": "#8b7169",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#adcfaf",
+                    "inverse-surface": "#2f312f",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f2f1ee",
+                    "on-surface-variant": "#57423b",
+                    "on-secondary-fixed": "#03210c",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#ff7f50",
+                    "primary-fixed-dim": "#ffb59c",
+                    "inverse-primary": "#ffb59c",
+                    "tertiary-container": "#aba399",
+                    "on-tertiary-container": "#3f3932",
+                    "on-primary-fixed": "#380c00",
+                    "tertiary-fixed": "#ebe1d6",
+                    "on-secondary-fixed-variant": "#304d35",
+                    "on-primary-fixed-variant": "#822800",
+                    "background": "#faf9f6",
+                    "secondary": "#47664b",
+                    "primary-fixed": "#ffdbcf",
+                    "surface-tint": "#a43c12",
+                    "on-surface": "#1a1c1a",
+                    "surface-container-low": "#f4f3f1",
+                    "secondary-container": "#c6e9c7",
+                    "surface-container": "#efeeeb",
+                    "tertiary": "#645d55",
+                    "tertiary-fixed-dim": "#cec5bb",
+                    "on-background": "#1a1c1a",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { backdrop-filter: blur(24px); }
+        .coral-gradient { background: linear-gradient(135deg, #a43c12 0%, #ff7f50 100%); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<a class="text-2xl font-serif italic text-stone-900 dark:text-stone-50" href="#">Lumie</a>
+<div class="hidden md:flex items-center space-gap-8 gap-x-8">
+<a class="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-sans text-sm tracking-wide" href="#">Home</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-sans text-sm tracking-wide" href="#">Services</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-sans text-sm tracking-wide" href="#">About</a>
+<a class="text-orange-800 dark:text-orange-400 font-bold border-b-2 border-orange-800 dark:border-orange-400 pb-1 font-sans text-sm tracking-wide" href="#">Booking</a>
+</div>
+<button class="coral-gradient text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm active:scale-95 transition-all shadow-md">Book Now</button>
+</div>
+</nav>
+<main class="pt-32 pb-20">
+<!-- Hero Section -->
+<header class="max-w-7xl mx-auto px-8 mb-20 text-center md:text-left">
+<h1 class="text-5xl md:text-7xl font-serif tracking-tight text-on-surface mb-6">Reserve your glow.</h1>
+<p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">Experience personalized beauty treatments in the heart of Koper. Select your service and find a time that suits your lifestyle.</p>
+</header>
+<!-- Booking & Form Grid -->
+<section class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Column 1: Booking & Calendar -->
+<div class="lg:col-span-7 space-y-12">
+<!-- Service Selection Card -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_8px_24px_rgba(26,28,26,0.06)]">
+<div class="flex items-center gap-4 mb-8">
+<span class="w-10 h-10 rounded-full coral-gradient flex items-center justify-center text-on-primary font-bold">1</span>
+<h2 class="text-2xl font-serif">Select Treatment</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<button class="flex items-center justify-between p-4 rounded-xl border border-outline-variant/20 hover:border-primary/40 transition-all text-left bg-surface-container-low group">
+<div>
+<p class="font-semibold">Signature Facial</p>
+<p class="text-sm text-on-surface-variant">60 mins · €65</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">check_circle</span>
+</button>
+<button class="flex items-center justify-between p-4 rounded-xl border border-outline-variant/20 hover:border-primary/40 transition-all text-left bg-surface-container-low group">
+<div>
+<p class="font-semibold">Lash Lift &amp; Tint</p>
+<p class="text-sm text-on-surface-variant">45 mins · €45</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">check_circle</span>
+</button>
+<button class="flex items-center justify-between p-4 rounded-xl border border-outline-variant/20 hover:border-primary/40 transition-all text-left bg-surface-container-low group">
+<div>
+<p class="font-semibold">Brow Sculpting</p>
+<p class="text-sm text-on-surface-variant">30 mins · €25</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">check_circle</span>
+</button>
+<button class="flex items-center justify-between p-4 rounded-xl border border-outline-variant/20 hover:border-primary/40 transition-all text-left bg-surface-container-low group">
+<div>
+<p class="font-semibold">Bridal Consultation</p>
+<p class="text-sm text-on-surface-variant">90 mins · €80</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">check_circle</span>
+</button>
+</div>
+</div>
+<!-- Calendar Placeholder Shell -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_8px_24px_rgba(26,28,26,0.06)]">
+<div class="flex items-center gap-4 mb-8">
+<span class="w-10 h-10 rounded-full coral-gradient flex items-center justify-center text-on-primary font-bold">2</span>
+<h2 class="text-2xl font-serif">Pick a Date &amp; Time</h2>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 text-center">
+<div class="flex justify-between items-center mb-6">
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+<span class="font-semibold">December 2024</span>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+<div class="grid grid-cols-7 gap-2 mb-8">
+<!-- Simple calendar UI -->
+<div class="text-xs text-on-surface-variant uppercase font-bold">Mo</div>
+<div class="text-xs text-on-surface-variant uppercase font-bold">Tu</div>
+<div class="text-xs text-on-surface-variant uppercase font-bold">We</div>
+<div class="text-xs text-on-surface-variant uppercase font-bold">Th</div>
+<div class="text-xs text-on-surface-variant uppercase font-bold">Fr</div>
+<div class="text-xs text-on-surface-variant uppercase font-bold">Sa</div>
+<div class="text-xs text-on-surface-variant uppercase font-bold">Su</div>
+<!-- Days -->
+<button class="h-10 w-10 flex items-center justify-center rounded-full text-stone-300 cursor-not-allowed">1</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-full text-stone-300 cursor-not-allowed">2</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-primary-fixed">3</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-primary-fixed">4</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-full bg-primary text-on-primary font-bold">5</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-primary-fixed">6</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-full text-stone-300 cursor-not-allowed">7</button>
+<!-- More days represented visually -->
+</div>
+<div class="flex flex-wrap gap-3 justify-center">
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/30 hover:border-primary transition-all">09:00 AM</button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/30 hover:border-primary transition-all">11:30 AM</button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/30 hover:border-primary transition-all">02:00 PM</button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/30 hover:border-primary transition-all">04:30 PM</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2: Inquiries & Info -->
+<div class="lg:col-span-5 space-y-12">
+<!-- Info Grid -->
+<div class="bg-secondary-container/30 rounded-xl p-8">
+<h3 class="text-2xl font-serif mb-6 text-on-secondary-container">Visit the Studio</h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<div>
+<p class="font-semibold">Address</p>
+<p class="text-on-surface-variant">Ankaranska cesta 5a, 6000 Koper, Slovenia</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary">schedule</span>
+<div>
+<p class="font-semibold">Opening Hours</p>
+<p class="text-on-surface-variant">Mon — Fri: 09:00 - 19:00</p>
+<p class="text-on-surface-variant">Sat — Sun: Closed</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary">call</span>
+<div>
+<p class="font-semibold">Contact</p>
+<p class="text-on-surface-variant">+386 40 123 456</p>
+<p class="text-on-surface-variant">hello@lumie.si</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact Inquiry Form -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_8px_24px_rgba(26,28,26,0.06)] border border-outline-variant/10">
+<h3 class="text-2xl font-serif mb-6">General Inquiry</h3>
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium mb-1.5 ml-1">Name</label>
+<input class="w-full bg-surface-container-high rounded-lg px-4 py-3 border-none focus:ring-2 focus:ring-primary/40 transition-all outline-none" placeholder="Your name" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1.5 ml-1">Email</label>
+<input class="w-full bg-surface-container-high rounded-lg px-4 py-3 border-none focus:ring-2 focus:ring-primary/40 transition-all outline-none" placeholder="hello@example.com" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1.5 ml-1">Message</label>
+<textarea class="w-full bg-surface-container-high rounded-lg px-4 py-3 border-none focus:ring-2 focus:ring-primary/40 transition-all outline-none resize-none" placeholder="How can we help you?" rows="4"></textarea>
+</div>
+<button class="w-full bg-on-surface text-surface py-3 rounded-full font-semibold hover:opacity-90 transition-opacity" type="submit">Send Message</button>
+</form>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+<section class="mt-20 px-8 max-w-7xl mx-auto">
+<div class="relative h-[450px] w-full rounded-2xl overflow-hidden shadow-xl bg-surface-container">
+<div class="absolute inset-0 grayscale contrast-125 opacity-70">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist city map of Koper Slovenia with clean lines and soft desaturated tones" data-location="Koper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJz7WSXHGayWaHcxfLcd9wE8LxU1korVGtU_Y8zlBtmftN3wYm41GvpiNa9Hdofx-PkiMyyTI2cnTuAY-AlzxbNfRyJG0KEtgGChtyUYTMoJ0Loh_3Ve6lkp4d14s0fWm8PinfxUMp6hErauDvHtIKEAXh3FYAhWyS43sMArX9zIQsWlMqyFrKhnzXvfNmP68RhKARq1GOvHFR1dz5QHfLMiqR9HuU8l3HgjOOTEVtBL60X6OR7VAOWXYfmfXt6GR5cbYCn89PD0w"/>
+</div>
+<!-- Interactive Marker Simulation -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="bg-primary text-on-primary px-4 py-2 rounded-lg font-serif italic text-lg shadow-lg mb-2 whitespace-nowrap">Lumie Studio</div>
+<div class="w-4 h-4 bg-primary rounded-full animate-ping absolute -bottom-1"></div>
+<div class="w-4 h-4 bg-primary rounded-full border-2 border-on-primary relative"></div>
+</div>
+<!-- Glass Overlay for Location Detail -->
+<div class="absolute bottom-8 left-8 p-6 glass-nav bg-surface/80 rounded-xl max-w-sm hidden md:block">
+<h4 class="font-serif text-xl mb-2">Find Us</h4>
+<p class="text-sm text-on-surface-variant mb-4">Located in the vibrant center of Koper, easily accessible with nearby parking at Zeleni park.</p>
+<button class="text-primary font-semibold flex items-center gap-2 hover:gap-3 transition-all text-sm">
+                        Open in Google Maps <span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Dynamic Imagery Interlude -->
+<section class="max-w-7xl mx-auto px-8 mt-32 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="order-2 md:order-1">
+<img class="rounded-xl w-full h-[500px] object-cover shadow-2xl" data-alt="High-end minimalist beauty salon interior with soft beige walls arched doorways and warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpz8a-G9hBCpynQ4RF1OcRbIQL26eS3x8XaNSAt3WLUnQr3M_OO9yh_QZiG2N3ccsJjScbnyu5XW4yhZ7gs8D9d6dWXqexOCdr6-UwjotjBgidYhKK9O7jegvhbURRCOXJT2e9dqKJcyBroD16AQbP1pSSEsY7cLXS1wju6cT3MgAC79WzRuP34i_ruk-oD2jGQKD1rkHDu7QLeibVzo8U1QpGoDQb5_YHagvvEJgtZWsZXvZPGOSOj5LZ2KEywTrrFMdBcS_ZJEw"/>
+</div>
+<div class="order-1 md:order-2 space-y-8 pl-0 md:pl-12">
+<span class="text-primary font-bold tracking-widest text-xs uppercase">Your Sanctuary</span>
+<h2 class="text-4xl font-serif leading-tight">A space designed for your tranquility.</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">From the moment you step through our doors, every detail is curated to provide a professional yet deeply relaxing experience. We use only premium products that respect both your skin and the environment.</p>
+<div class="flex gap-4">
+<div class="w-12 h-px bg-outline-variant self-center"></div>
+<p class="italic font-serif">Anja Humar, Founder</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-stone-100 dark:bg-stone-900 w-full mt-20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 px-12 py-16 max-w-7xl mx-auto">
+<div class="space-y-6">
+<span class="text-xl font-serif text-stone-800 dark:text-stone-200">Lumie</span>
+<p class="text-stone-500 dark:text-stone-400 font-sans text-sm leading-loose">An ethereal digital sanctuary for beauty and wellness. Professional care meets youthful energy in every treatment we offer.</p>
+</div>
+<div class="space-y-4">
+<p class="font-semibold text-stone-800 dark:text-stone-200">Visit Us</p>
+<ul class="space-y-3 font-sans text-sm tracking-wide text-stone-500 dark:text-stone-400">
+<li>Ankaranska cesta 5a, Koper</li>
+<li>Open: Mon-Fri 9:00-19:00</li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-semibold text-stone-800 dark:text-stone-200">Social</p>
+<div class="flex flex-col gap-3 font-sans text-sm tracking-wide">
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline transition-all duration-200" href="#">Instagram</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline transition-all duration-200" href="#">Facebook</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-12 pb-12">
+<p class="text-stone-500 dark:text-stone-400 font-sans text-xs pt-8 border-t border-stone-200 dark:border-stone-800 text-center md:text-left">
+                © 2024 Lumie Beauty Salon. All rights reserved.
+            </p>
+</div>
+</footer>
+</body></html>
 
-function updateTranslations() {
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    el.textContent = translations[currentLanguage][key] || key;
-  });
-}
+<!-- Lumie - Booking & Contact -->
+<!DOCTYPE html>
 
-function showPage(pageName) {
-  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-  document.getElementById(`page-${pageName}`).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-function openUchatzWidget() {
-  if (window.uchatzWidgetToggle) window.uchatzWidgetToggle();
-}
-
-const savedLang = localStorage.getItem('lumie-lang') || 'sl';
-if (savedLang !== 'sl') setLanguage(savedLang);
-else updateTranslations();
-
-document.getElementById('contactForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const msg = currentLanguage === 'en' ? 'Thank you! I\'ll get back to you soon.' : currentLanguage === 'it' ? 'Grazie! Ti risponderò presto.' : 'Hvala! Odgovorila ti bom kmalu.';
-  alert(msg);
-  e.target.reset();
-});
-</script>
-    <script src="https://uchatz.com/widget.js" data-key="98735219-265f-4d14-8c1a-733eb1bdb214" data-color="#a43c12" async></script>
-
-</body>
-</html>
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | Lumie Beauty Salon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface": "#faf9f6",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dbdad7",
+                        "on-secondary-container": "#4b6a4f",
+                        "surface-variant": "#e3e2e0",
+                        "secondary-fixed": "#c8ebca",
+                        "outline-variant": "#dec0b6",
+                        "on-tertiary-fixed": "#1f1b14",
+                        "on-tertiary-fixed-variant": "#4c463e",
+                        "surface-container-highest": "#e3e2e0",
+                        "surface-container-high": "#e9e8e5",
+                        "on-primary-container": "#6c2000",
+                        "primary": "#a43c12",
+                        "surface-bright": "#faf9f6",
+                        "outline": "#8b7169",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#adcfaf",
+                        "inverse-surface": "#2f312f",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f2f1ee",
+                        "on-surface-variant": "#57423b",
+                        "on-secondary-fixed": "#03210c",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#ff7f50",
+                        "primary-fixed-dim": "#ffb59c",
+                        "inverse-primary": "#ffb59c",
+                        "tertiary-container": "#aba399",
+                        "on-tertiary-container": "#3f3932",
+                        "on-primary-fixed": "#380c00",
+                        "tertiary-fixed": "#ebe1d6",
+                        "on-secondary-fixed-variant": "#304d35",
+                        "on-primary-fixed-variant": "#822800",
+                        "background": "#faf9f6",
+                        "secondary": "#47664b",
+                        "primary-fixed": "#ffdbcf",
+                        "surface-tint": "#a43c12",
+                        "on-surface": "#1a1c1a",
+                        "surface-container-low": "#f4f3f1",
+                        "secondary-container": "#c6e9c7",
+                        "surface-container": "#efeeeb",
+                        "tertiary": "#645d55",
+                        "tertiary-fixed-dim": "#cec5bb",
+                        "on-background": "#1a1c1a",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Noto Serif', serif; }
+        .glass-nav { background: rgba(250, 249, 246, 0.8); backdrop-filter: blur(24px); }
+        .coral-gradient { background: linear-gradient(135deg, #a43c12 0%, #ff7f50 100%); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 glass-nav">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<span class="text-2xl font-serif italic text-stone-900 dark:text-stone-50">Lumie</span>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-sans text-sm tracking-wide" href="#">Home</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-sans text-sm tracking-wide" href="#">Services</a>
+<a class="text-orange-800 dark:text-orange-400 font-bold border-b-2 border-orange-800 dark:border-orange-400 pb-1 font-sans text-sm tracking-wide" href="#">About</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-sans text-sm tracking-wide" href="#">Booking</a>
+<button class="coral-gradient text-on-primary px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-80 transition-all active:scale-95">Book Now</button>
+</div>
+<!-- Mobile Toggle Placeholder -->
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section: Ethereal Editorial Layout -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<h1 class="text-6xl md:text-8xl font-serif tracking-tight leading-none mb-8">
+                        The Soul of <br/>
+<span class="italic text-primary">Beauty.</span>
+</h1>
+<p class="text-lg md:text-xl text-on-surface-variant max-w-xl leading-relaxed mb-10">
+                        At Lumie, we believe skincare is a conversation between your natural glow and the care it receives. Founded by Anja Humar, we offer a sanctuary of modern aesthetics and youthful energy.
+                    </p>
+<div class="flex items-center gap-6">
+<div class="h-px w-24 bg-outline-variant/30"></div>
+<span class="text-sm tracking-widest uppercase font-semibold text-primary">Est. 2021</span>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative z-10">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist aesthetic beauty salon interior with soft natural light, beige walls, and organic curved furniture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0qXv4gr5NwZfE3cF5QKRRGFK88QY_y20k0ApM0Mjwy22d-r-g08Imihpu6tOZskdhsyOxzxT3o_2kS-yZbF7UKIGypVfg9be8AO_6_TpNxB18ZW5du1We-ogpgVsZ540m7aFuySoSghlsiZ3WWVxACApHjaAIygTNrlxYHytkzxEdC2b3KlE2qJPye-xGEPs3Kk1ZFgKIrIiWqCHJ7MOGiD5no__4pcIoWY999OAIWODz1WH0t0vPdt4RB0mi0jibzQr98-x26a0"/>
+</div>
+<!-- Decorative Floating Element -->
+<div class="absolute -bottom-8 -left-8 w-48 h-48 bg-secondary-container rounded-xl -z-0 opacity-50"></div>
+</div>
+</div>
+</section>
+<!-- The Founder: Asymmetric Storytelling -->
+<section class="bg-surface-container-low py-24 mb-32">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="order-2 lg:order-1 relative">
+<div class="aspect-[3/4] max-w-md mx-auto rounded-xl overflow-hidden relative border-[12px] border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Professional portrait of Anja Humar, a young woman with a warm smile, wearing a cream linen shirt in a sunlit studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe8b-5GSfJgPhYqZgrd7uCUFDtpFgCGZY90YObtIyXIgpxpHgx6iEaonJQzN9-Mwo8gMNOzov8D0fws8a9OzjydXyYI1MF1VyJ2LOvQNVXNoZnxMDi4bdHPr28fEAXhz1H3BiDfGNKSdlvLvVDE2pvcLtTD5y3NP5uT4FkJ7ZAb7w6xsaKfIRij_xlsfMoYTzVxG-u04sTx9kEbTFTGlXJmw6X0rg_10waCyh4NIBbk-lJsRg2D9znNioXEK1fhBbUdGjdx-4cm9g"/>
+</div>
+<div class="absolute top-10 -right-4 bg-primary p-6 rounded-xl shadow-xl hidden md:block">
+<span class="material-symbols-outlined text-on-primary text-4xl" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<span class="text-primary font-bold tracking-widest text-xs uppercase mb-4 block">Meet the Visionary</span>
+<h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight">Anja Humar</h2>
+<div class="space-y-6 text-on-surface-variant leading-relaxed text-lg">
+<p>
+                                Beauty has always been more than skin deep for me. It’s about the quiet confidence that radiates when you feel truly cared for. I founded Lumie with a simple mission: to bridge the gap between high-end medical expertise and the warm, personal touch of a boutique studio.
+                            </p>
+<p>
+                                With a background in advanced dermatological aesthetics and a passion for holistic wellness, I’ve curated a space where science meets serenity. Every treatment at Lumie is a reflection of my commitment to your unique journey.
+                            </p>
+<div class="pt-4">
+<img class="h-16 opacity-80 filter contrast-125" data-alt="Elegant handwritten signature of Anja Humar in dark ink on a light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF5fLMMadmo8VcRiMejbymfJf5YUiAy2zfyQ7HGPpl2l9GstADfSpyXSpIp6uDlZOKob3j6B9VLh4em3C78hGWcVTFxF0pia1e2FjNqq3uGLfkmRJD-XsCdvc4n28a0nMEYrgJr8kqi_BMe3Jjp1Uv8kU0KEf00gOu2RqDBE2XgpklGhAjadknNEOh7e2itKxrGmLNQfLfJwzPP812lWm4n81bcWweVhhsrlOen3o91Ijf54dRyS9nF0Hk20_1IHdcRA95j7wnlSc"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Meet the Team: Service Mosaic Grid -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<div class="mb-16">
+<h2 class="text-4xl md:text-6xl font-serif text-center mb-4">The Specialists</h2>
+<p class="text-on-surface-variant text-center max-w-2xl mx-auto">A collective of passionate experts dedicated to your radiance.</p>
+</div>
+<!-- Mosaic Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Team Member 1 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Portrait of a female facial specialist with hair tied back, wearing a professional sage green uniform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrFGR3DPclCYCIFrzHJr9YQxBFZTi0Wt0pBOW3oPXzkWdYGXV3VX1r_BuNs7gbrLzkH-0AHpiyNkR31wIeFnc2-QjqJ2xBHfFxvpSUVHjAZmwnshbbcXYRyswB68DEFaAgEnpbfVnWrDqYCoxY4mJrZj0XYS0AaZYVRqka-9qWSWbC7Nwvp1BNGlKasmc0zsT9J3hpj07NUzakvXltWcGuEnITBG8R-Y6eOPWu7ceGtG0xnWYaDqb7htYjZlHbgefIq2drBFulkF4"/>
+<div class="absolute bottom-4 left-4 right-4 p-4 bg-surface/90 backdrop-blur-md rounded-lg translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+<p class="text-xs font-bold text-primary uppercase tracking-tighter">5+ Years Experience</p>
+</div>
+</div>
+<h3 class="text-2xl font-serif mb-1">Elena Rossi</h3>
+<p class="text-primary font-medium text-sm mb-3">Lead Aesthetician</p>
+<p class="text-on-surface-variant text-sm leading-relaxed">Expert in advanced skin resurfacing and personalized glow protocols.</p>
+</div>
+<!-- Team Member 2 - Offset/Accent Card -->
+<div class="group md:mt-12">
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Portrait of a smiling young woman with bright eyes, specialized in lash and brow artistry" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXVgVXPseL92bw07d2bF4MP3BX-n7-L8vmxfBfQYLvdEzdQdsE3BX_KTzMmLKoyrm2yk793MYtEfQP7KyALMusHpfJF91AJZiVCJnG_rtTSqsuL9es7FcsP7UiGRoQ5Fbtmd1MB2ZTu2SIdSYRl6l8sp3vn2jJP_CT7Cftqi6WndPS4Y7ZHqcxQ5RDirmOF80ZyA3rWyJHEdnMR1-fHJ0DNTwutjTSlBJohuEjldKaJ6qxxuISM-ya_5fYp8b_ZZlHEUZr0qY-Ubg"/>
+<div class="absolute bottom-4 left-4 right-4 p-4 bg-surface/90 backdrop-blur-md rounded-lg translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+<p class="text-xs font-bold text-primary uppercase tracking-tighter">The Brow Architect</p>
+</div>
+</div>
+<h3 class="text-2xl font-serif mb-1">Maja Kova</h3>
+<p class="text-primary font-medium text-sm mb-3">Lash &amp; Brow Stylist</p>
+<p class="text-on-surface-variant text-sm leading-relaxed">Master of the natural look. Maja believes eyebrows are the frame of the soul.</p>
+</div>
+<!-- Team Member 3 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Portrait of a calm female professional specialized in therapeutic massage and body treatments" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk7KO-7JrU67A45i15JOmIPS5FtXLlWNMyx1sgDkynd-0C2qhSt2nX1B2TLJSP1ElmxlmX0awxSGhm8y7JPygKaWxACVHb_tI_GAD-LmaBDONJByfAjpnIsuncdfoQbQ_-KOMHrn2jZ5iREY9Wfn-17oT7GJ7Ah8WFBUsJacqDhcjquE63ipBQgXzHt5mdJfX1lN_tPjohsqrivFm9BMek6PL29kdmKx-IGQ2D54eAottVlR0iweoDJTMxU8FEguRWYuqPJFjVzrU"/>
+<div class="absolute bottom-4 left-4 right-4 p-4 bg-surface/90 backdrop-blur-md rounded-lg translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+<p class="text-xs font-bold text-primary uppercase tracking-tighter">Wellness Guru</p>
+</div>
+</div>
+<h3 class="text-2xl font-serif mb-1">Sara Lin</h3>
+<p class="text-primary font-medium text-sm mb-3">Body Therapy Specialist</p>
+<p class="text-on-surface-variant text-sm leading-relaxed">Dedicated to releasing tension through signature lymphatic drainage techniques.</p>
+</div>
+</div>
+</section>
+<!-- Values Section: Floating Cards -->
+<section class="bg-surface-container py-24">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="bg-surface-container-lowest p-10 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">eco</span>
+<h4 class="text-xl font-serif mb-4">Ethical Care</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">We exclusively use cruelty-free, sustainable products that respect your skin and the planet.</p>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">science</span>
+<h4 class="text-xl font-serif mb-4">Modern Tech</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Continuous education ensures we bring the latest clinical innovations to our studio.</p>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">favorite</span>
+<h4 class="text-xl font-serif mb-4">Personal Link</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">You aren't just a client; you are part of the Lumie community. We listen first.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-stone-100 dark:bg-stone-900 w-full mt-20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 px-12 py-16 max-w-7xl mx-auto">
+<div class="flex flex-col gap-4">
+<span class="text-xl font-serif text-stone-800 dark:text-stone-200">Lumie</span>
+<p class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-wide leading-relaxed">
+                    Elevating your natural radiance through expert care and a youthful touch. Discover the sanctuary of Lumie.
+                </p>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="font-bold text-emerald-900 dark:text-emerald-500 uppercase text-xs tracking-widest mb-2">Contact</h5>
+<span class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-wide">Ankaranska cesta 5a, Koper</span>
+<span class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-wide">Open: Mon-Fri 9:00-19:00</span>
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline font-sans text-sm tracking-wide transition-all" href="#">Instagram</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 underline-offset-4 underline font-sans text-sm tracking-wide transition-all" href="#">Facebook</a>
+</div>
+<div class="flex flex-col gap-6">
+<h5 class="font-bold text-emerald-900 dark:text-emerald-500 uppercase text-xs tracking-widest mb-2">Newsletter</h5>
+<div class="flex gap-2">
+<input class="bg-surface-container-high rounded-md border-none text-sm w-full focus:ring-1 focus:ring-primary/40" placeholder="Email address" type="email"/>
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-md transition-transform active:scale-95">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<p class="text-stone-500 dark:text-stone-400 font-sans text-xs tracking-wide">© 2024 Lumie Beauty Salon. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Nav Shell -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface/80 backdrop-blur-xl border-none z-50 flex justify-around items-center py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center text-stone-500 gap-1" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center text-stone-500 gap-1" href="#">
+<span class="material-symbols-outlined">spa</span>
+<span class="text-[10px] font-bold">Services</span>
+</a>
+<a class="flex flex-col items-center text-orange-800 gap-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">info</span>
+<span class="text-[10px] font-bold">About</span>
+</a>
+<a class="flex flex-col items-center text-stone-500 gap-1" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-[10px] font-bold">Book</span>
+</a>
+</nav>
+</body></html>
