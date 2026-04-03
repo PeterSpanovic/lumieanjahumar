@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Lumie Beauty Salon | Koper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #faf9f6; color: #1a1c1a; line-height: 1.6; }
+        .page { display: none !important; }
+        .page.active { display: block !important; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(250, 249, 246, 0.95); backdrop-filter: blur(10px); z-index: 50; border-bottom: 1px solid #dec0b6; padding: 1rem 2rem; }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Noto Serif', serif; font-style: italic; font-size: 1.5rem; cursor: pointer; color: #1a1c1a; font-weight: 700; }
+        .nav-links { display: flex; gap: 2rem; flex: 1; justify-content: center; }
+        .nav-links a { cursor: pointer; color: #57423b; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links a:hover { color: #a43c12; }
+        .nav-right { display: flex; gap: 1rem; align-items: center; }
+        .lang-select { cursor: pointer; padding: 0.5rem 1rem; background: none; border: none; font-size: 0.85rem; color: #57423b; font-weight: 500; }
+        .book-btn { background: linear-gradient(135deg, #a43c12 0%, #ff7f50 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(164, 60, 18, 0.2); }
+        main { margin-top: 80px; padding: 0 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; padding: 4rem 0; margin-bottom: 4rem; }
+        .hero-text h1 { font-family: 'Noto Serif', serif; font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; color: #1a1c1a; }
+        .hero-text h1 .gradient { background: linear-gradient(135deg, #a43c12, #ff7f50); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: italic; }
+        .hero-text p { font-size: 1.1rem; color: #57423b; margin-bottom: 2rem; max-width: 500px; line-height: 1.8; }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn-primary { background: linear-gradient(135deg, #a43c12 0%, #ff7f50 100%); color: white; padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(164, 60, 18, 0.2); }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-3px); }
+        .btn-secondary { background: white; color: #1a1c1a; padding: 1rem 2rem; border: 2px solid #dec0b6; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s; }
+        .btn-secondary:hover { background: #f4f3f1; transform: translateY(-3px); }
+        .hero-image img { width: 100%; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(164, 60, 18, 0.1); }
+        .personal-box { background: rgba(71, 102, 75, 0.1); border-left: 4px solid #a43c12; padding: 2rem; border-radius: 1rem; margin: 3rem 0; max-width: 800px; }
+        .personal-box h3 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-bottom: 1rem; color: #1a1c1a; }
+        .personal-box p { color: #57423b; font-style: italic; line-height: 1.8; }
+        .cta-section { background: linear-gradient(135deg, rgba(164, 60, 18, 0.1) 0%, rgba(255, 127, 80, 0.05) 100%); border: 1px solid #dec0b6; border-radius: 1.5rem; padding: 3rem; text-align: center; margin: 4rem 0; }
+        .cta-section h2 { font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 1rem; color: #1a1c1a; }
+        .cta-section p { color: #57423b; font-size: 1.1rem; margin-bottom: 2rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .service-card { background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #dec0b6; transition: all 0.3s; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(164, 60, 18, 0.1); }
+        .service-card h3 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-bottom: 1rem; color: #1a1c1a; }
+        .service-card p { color: #57423b; font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.7; }
+        .service-footer { display: flex; justify-content: space-between; align-items: center; }
+        .service-price { color: #ff7f50; font-weight: 700; font-size: 1.1rem; }
+        .service-btn { background: none; border: none; color: #a43c12; cursor: pointer; font-size: 1.5rem; transition: color 0.2s; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin: 3rem 0; }
+        .about-text h2 { font-family: 'Noto Serif', serif; font-size: 2rem; margin-bottom: 1.5rem; color: #1a1c1a; }
+        .about-text p { color: #57423b; margin-bottom: 1.5rem; line-height: 1.8; font-size: 1rem; }
+        .about-image img { width: 100%; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(164, 60, 18, 0.1); }
+        .why-solo { background: linear-gradient(to bottom, #f4f3f1, #faf9f6); padding: 3rem; border-radius: 1.5rem; margin: 3rem 0; }
+        .why-solo h2 { font-family: 'Noto Serif', serif; font-size: 2rem; margin-bottom: 2rem; color: #1a1c1a; }
+        .why-solo-item { margin-bottom: 2rem; color: #57423b; line-height: 1.8; }
+        .why-solo-item strong { color: #a43c12; }
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 3rem 0; }
+        .value-card { background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #dec0b6; text-align: center; }
+        .value-card h4 { font-family: 'Noto Serif', serif; font-size: 1.2rem; margin-bottom: 1rem; color: #1a1c1a; }
+        .value-card p { color: #57423b; font-size: 0.95rem; line-height: 1.6; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 3rem 0; }
+        .contact-form { background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #dec0b6; }
+        .contact-form h2 { font-family: 'Noto Serif', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: #1a1c1a; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: #1a1c1a; font-weight: 500; font-size: 0.9rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #dec0b6; border-radius: 0.5rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; color: #1a1c1a; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #a43c12; box-shadow: 0 0 0 3px rgba(164, 60, 18, 0.1); }
+        .form-submit { width: 100%; background: linear-gradient(135deg, #a43c12 0%, #ff7f50 100%); color: white; padding: 1rem; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 1rem; }
+        .form-submit:hover { opacity: 0.9; }
+        .contact-info { background: rgba(71, 102, 75, 0.1); padding: 2rem; border-radius: 1rem; }
+        .contact-info h3 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-bottom: 1.5rem; color: #1a1c1a; }
+        .info-item { margin-bottom: 1.5rem; }
+        .info-label { font-weight: 600; color: #1a1c1a; margin-bottom: 0.3rem; }
+        .info-value { color: #57423b; }
+        .info-value a { color: #a43c12; text-decoration: none; }
+        .info-value a:hover { text-decoration: underline; }
+        .legal-page { max-width: 900px; margin: 2rem auto; padding: 2rem 0; }
+        .legal-page h1 { font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 2rem; color: #1a1c1a; }
+        .legal-page h2 { font-family: 'Noto Serif', serif; font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; color: #1a1c1a; }
+        .legal-page p { color: #57423b; line-height: 1.8; margin-bottom: 1rem; }
+        footer { background: #f0f0f0; color: #57423b; padding: 3rem 2rem 1rem; margin-top: 4rem; border-top: 1px solid #dec0b6; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h4 { font-weight: 700; color: #1a1c1a; margin-bottom: 1rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        .footer-section p, .footer-section a { font-size: 0.9rem; line-height: 1.8; color: #57423b; text-decoration: none; }
+        .footer-section a:hover { color: #a43c12; }
+        .footer-bottom { border-top: 1px solid #dec0b6; padding-top: 1.5rem; text-align: center; font-size: 0.85rem; }
+        @media (max-width: 768px) {
+            nav { padding: 0.75rem 1rem; }
+            .nav-links { display: none; }
+            main { margin-top: 100px; padding: 0 1rem; }
+            .hero { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 0; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .hero-buttons { flex-direction: column; }
+            .btn-primary, .btn-secondary { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="nav-logo" onclick="showPage('home')">Lumie</div>
+        <div class="nav-links">
+            <a onclick="showPage('home')" data-i18n="nav.home">Dom</a>
+            <a onclick="showPage('services')" data-i18n="nav.services">Storitve</a>
+            <a onclick="showPage('about')" data-i18n="nav.about">O meni</a>
+            <a onclick="showPage('contact')" data-i18n="nav.contact">Kontakt</a>
+        </div>
+        <div class="nav-right">
+            <select class="lang-select" id="langSelect" onchange="setLanguage(this.value)">
+                <option value="sl">SL</option>
+                <option value="en">EN</option>
+                <option value="it">IT</option>
+            </select>
+            <button class="book-btn" onclick="openUchatzWidget()" data-i18n="nav.book">Rezerviraj</button>
+        </div>
+    </div>
+</nav>
+
+<main id="page-home" class="page active">
+    <div class="container">
+        <section class="hero">
+            <div class="hero-text">
+                <h1><span data-i18n="home.hero.radiant">Umetnost</span> <span class="gradient">Sevanja</span></h1>
+                <p data-i18n="home.hero.desc">Stopite v intimni prostor, kjer se klinična natančnost sreča z osebno nego. Doživite vrhunske lepotne tretmaje, zasnovane za razkritje vašega najbolj žarečega jaza.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="openUchatzWidget()" data-i18n="home.explore">Raziskuj Storitve</button>
+                    <button class="btn-secondary" onclick="openUchatzWidget()" data-i18n="home.reserve">Rezerviraj Zdaj</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6AaizB2jVEJO0C9MQxk50i-2Ehv_Cu5-OeJ7Go4ZEw0ITnVDnETAS2gouMKuLvkpmeS_MEYcCvCjLc_7nYfHq4KWqeGcG0jLz6O5tHSIc-z1RW0T7xcxl8v-8CaCZBKrL6MkLe5S6RO4PwBqkUGEXd705aVyVANmqbg91RwD5cE4CQAdVQfypnZmIPgin-wvyjn7I4nfSwF53QXNUtntXG0fjWVc9lL0ZOIgw5caz7zjrYoch5AZSSgioqAt71cDbP3b7mhEXHUM" alt="Lumie Beauty"/>
+            </div>
+        </section>
+
+        <section class="personal-box">
+            <h3>✨ <span data-i18n="home.personal.title">Samo Mene, Samo Za Vas</span></h3>
+            <p data-i18n="home.personal.intro">Sem Anja, lasnica Lumie. Vsak termin vodim osebno jaz – zato poznate vsakič isto osebo, iste roke in isto strokovno znanje. Tukaj ni timov, samo individualna pozornost in resna skrb za vašo lepoto.</p>
+        </section>
+
+        <section class="cta-section">
+            <h2 data-i18n="home.cta.title">Pripravljen/a za transformacijo?</h2>
+            <p data-i18n="home.cta.desc">Mesta se hitro napolnijo. Pošlji mi sporočilo ali pokliči.</p>
+            <button class="btn-primary" onclick="openUchatzWidget()" data-i18n="home.cta.button">Rezerviraj Zdaj</button>
+        </section>
+    </div>
+</main>
+
+<main id="page-services" class="page">
+    <div class="container">
+        <h1 style="font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 2rem;" data-i18n="services.title">Meni Storitev</h1>
+        <p style="color: #57423b; font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px;" data-i18n="services.desc">Specializiram se na vrhunske obdelave obraza in nege kože. Vsaka storitev je prilagojena vašim potrebam.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3 data-i18n="services.facial1.name">Lumie Sij Facial</h3>
+                <p data-i18n="services.facial1.desc">60 min — Dvojno čiščenje, encimski peeling, infuzija kisika in hladilna maska. Popoln reset za vašo kožo.</p>
+                <div class="service-footer">
+                    <span class="service-price">€140</span>
+                    <button class="service-btn" onclick="openUchatzWidget()">→</button>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3 data-i18n="services.facial2.name">Oblikuj in Dvigni</h3>
+                <p data-i18n="services.facial2.desc">75 min — Globinska masaža obraza, namenjena napetosti in limfatičnemu odtoku. Vidni rezultati.</p>
+                <div class="service-footer">
+                    <span class="service-price">€165</span>
+                    <button class="service-btn" onclick="openUchatzWidget()">→</button>
+                </div>
+            </div>
+        </div>
+        <div class="personal-box">
+            <p data-i18n="services.personal">✨ Pred vsakim tretmajem opravim podrobno pogovor o vaših potrebah. Nisem tu za hitko storitev – sem tu za pravo skrb. Vsakega gosta poznam osebno.</p>
+        </div>
+    </div>
+</main>
+
+<main id="page-about" class="page">
+    <div class="container">
+        <h1 style="font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 3rem;" data-i18n="about.hero">O Meni</h1>
+        <div class="about-grid">
+            <div class="about-text">
+                <h2 data-i18n="about.founder">Anja Humar</h2>
+                <p data-i18n="about.founder.p1">Za mene je lepota bila vedno več kot samo koža. To je tiha samozavest, ki se širi, ko se res počutiš nego. Lumie sem založila, ker sem verjela, da sta osebnost in strokovnost lahko neločljivi.</p>
+                <p data-i18n="about.founder.p2">Z izobrazbo iz napredne estetike in 8+ let izkušenj sem se odločila, da bom delala samo sama. Ne zato, ker sem težka za delo (smehaj), ampak ker želim, da poznate vsakič isto osebo, isto roko, isti pristop. Ni tu zamenjav in površnosti – samo jaz in vaša lepota.</p>
+                <p data-i18n="about.founder.p3">Vsak termin je mini-ritualno doživetje. Veste, kaj boste dobili. In to dobite res od mene, osebno.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe8b-5GSfJgPhYqZgrd7uCUFDtpFgCGZY90YObtIyXIgpxpHgx6iEaonJQzN9-Mwo8gMNOzov8D0fws8a9OzjydXyYI1MF1VyJ2LOvQNVXNoZnxMDi4bdHPr28fEAXhz1H3BiDfGNKSdlvLvVDE2pvcLtTD5y3NP5uT4FkJ7ZAb7w6xsaKfIRij_xlsfMoYTzVxG-u04sTx9kEbTFTGlXJmw6X0rg_10waCyh4NIBbk-lJsRg2D9znNioXEK1fhBbUdGjdx-4cm9g" alt="Anja"/>
+            </div>
+        </div>
+        <div class="why-solo">
+            <h2 data-i18n="about.solo.title">Zakaj Sam?</h2>
+            <div class="why-solo-item"><strong data-i18n="about.solo.consistency">Doslednost:</strong> <span data-i18n="about.solo.consistency.text">Vsak tretma je enak. Isto tehniko, isto pozornost, iste rezultate dobite od mene.</span></div>
+            <div class="why-solo-item"><strong data-i18n="about.solo.personal">Osebnost:</strong> <span data-i18n="about.solo.personal.text">Poznate me. Nikoli ne menjam gesta, energije ali pristopa. Sem 100% vedno.</span></div>
+            <div class="why-solo-item"><strong data-i18n="about.solo.quality">Kakovost:</strong> <span data-i18n="about.solo.quality.text">Nisem pod časovnim pritiskom. Vsak tretma je toliko dolg, kolikor je potrebno. Ni hitenja.</span></div>
+        </div>
+        <div class="values-grid">
+            <div class="value-card">
+                <h4 data-i18n="about.values.1.title">Naravno in Etično</h4>
+                <p data-i18n="about.values.1.desc">Samo proizvodi brez okrutnosti in naravni ingredienčni.</p>
+            </div>
+            <div class="value-card">
+                <h4 data-i18n="about.values.2.title">Osebna Skrb</h4>
+                <p data-i18n="about.values.2.desc">Sem tukaj za vas, ne za kvote. Vsak gost je posebna oseba.</p>
+            </div>
+            <div class="value-card">
+                <h4 data-i18n="about.values.3.title">Strokovnost</h4>
+                <p data-i18n="about.values.3.desc">Kontinuirana izobrazba in ljubezen do svoje discipline.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main id="page-contact" class="page">
+    <div class="container">
+        <h1 style="font-family: 'Noto Serif', serif; font-size: 2.5rem; margin-bottom: 1rem;" data-i18n="contact.title">Kontaktiraj Me</h1>
+        <p style="color: #57423b; font-size: 1.1rem; margin-bottom: 2rem;" data-i18n="contact.desc">Direktno do mene. Brez sekretaric, brez sistematike. Samo Anja.</p>
+        <div class="contact-grid">
+            <div class="contact-form">
+                <h2 data-i18n="contact.form.title">Pošlji Mi Sporočilo</h2>
+                <form id="contactForm">
+                    <div class="form-group"><label data-i18n="contact.form.name">Ime</label><input type="text" placeholder="Tvoje ime" required></div>
+                    <div class="form-group"><label data-i18n="contact.form.email">E-pošta</label><input type="email" placeholder="hello@example.com" required></div>
+                    <div class="form-group"><label data-i18n="contact.form.phone">Telefonska Številka</label><input type="tel" placeholder="+386 40 123 456"></div>
+                    <div class="form-group"><label data-i18n="contact.form.message">Kaj te zanima?</label><textarea placeholder="Povej mi o sebi..." required></textarea></div>
+                    <button type="submit" class="form-submit" data-i18n="contact.form.submit">Pošlji</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3 data-i18n="contact.visit">Obišči Me</h3>
+                <div class="info-item"><div class="info-label" data-i18n="contact.address.label">Naslov</div><div class="info-value">Ankaranska cesta 5a, 6000 Koper, Slovenija</div></div>
+                <div class="info-item"><div class="info-label" data-i18n="contact.hours.label">Delovni Čas</div><div class="info-value"><span data-i18n="contact.hours.weekday">Pon – Pet</span>: 09:00 – 19:00</div></div>
+                <div class="info-item"><div class="info-label" data-i18n="contact.phone.label">Pokličite Samo Mene</div><div class="info-value"><a href="tel:+38640123456">+386 40 123 456</a></div></div>
+                <div class="info-item"><div class="info-label" data-i18n="contact.email.label">E-pošta</div><div class="info-value"><a href="mailto:hello@lumie.si">hello@lumie.si</a></div></div>
+            </div>
+        </div>
+        <div class="personal-box"><p data-i18n="contact.solo.message">Ker sem sama, imam omejene termine. Rezerviraj vnaprej. Ampak ko prihajaš k meni, veš, da ti je čas samo tvoj.</p></div>
+    </div>
+</main>
+
+<main id="page-imprint" class="page">
+    <div class="legal-page">
+        <h1 data-i18n="imprint.title">Impresum</h1>
+        <h2 data-i18n="imprint.business">Podjetje</h2>
+        <p><strong>Lumie Beauty Salon</strong><br/><strong data-i18n="imprint.owner">Lastnik</strong>: Anja Humar<br/><strong data-i18n="imprint.legal">Pravna forma</strong>: s.p.<br/><strong data-i18n="imprint.vat">Davčna številka</strong>: SI PLACEHOLDER</p>
+        <h2 data-i18n="imprint.contact">Kontakt</h2>
+        <p>Ankaranska cesta 5a, 6000 Koper, Slovenija<br/>Tel: +386 40 123 456<br/>Email: hello@lumie.si</p>
+        <h2 data-i18n="imprint.responsible">Odgovorna oseba</h2>
+        <p data-i18n="imprint.responsible.text">Anja Humar je odgovorna oseba za vsebino na tej spletni strani v skladu z zakonodajo Republike Slovenije.</p>
+    </div>
+</main>
+
+<main id="page-privacy" class="page">
+    <div class="legal-page">
+        <h1 data-i18n="privacy.title">Politika Zasebnosti</h1>
+        <h2 data-i18n="privacy.intro.title">Uvod</h2>
+        <p data-i18n="privacy.intro.text">Lumie Beauty Salon se zavezuje k vaši zasebnosti. Ta politika pojasnjuje, kako zbiramo, uporabljamo in varujemo vaše osebne podatke.</p>
+        <h2 data-i18n="privacy.data.title">Zbiranje Podatkov</h2>
+        <p data-i18n="privacy.data.text">Podatke zbiramo samo s pomočjo kontaktnega obrazca. Zbrani podatki vključujejo ime, e-poštni naslov, telefonsko številko in sporočilo. Ti podatki se uporabljajo izključno za odgovor na vaš poizvedek.</p>
+        <h2 data-i18n="privacy.protection.title">Zaščita Podatkov</h2>
+        <p data-i18n="privacy.protection.text">Vaši osebni podatki so varni in se ne razkrij tretjim stranem brez vašega soglasja, razen kot zahteva zakon. Spletna stran uporablja HTTPS za šifriranje podatkov med pošiljanjem.</p>
+        <h2 data-i18n="privacy.rights.title">Vaše Pravice</h2>
+        <p data-i18n="privacy.rights.text">Imate pravico dostopa, popravljanja ali brisanja svojih osebnih podatkov. Za uresničitev teh pravic nas kontaktirajte prek e-pošte na hello@lumie.si.</p>
+    </div>
+</main>
+
+<main id="page-terms" class="page">
+    <div class="legal-page">
+        <h1 data-i18n="terms.title">Pogoji Uporabe</h1>
+        <h2 data-i18n="terms.intro.title">Splošno</h2>
+        <p data-i18n="terms.intro.text">Uporaba te spletne strani pomeni, da se strinjate s temi pogoji uporabe. Če se s pogoji ne strinjate, prosimo, ne uporabljajte te spletne strani.</p>
+        <h2 data-i18n="terms.services.title">Storitve</h2>
+        <p data-i18n="terms.services.text">Storitve so dostopne samo osebam, ki so stare vsaj 18 let. Lumie Beauty Salon si pridržuje pravico do spremembe ali prekinca storitev brez predhodnega obvestila.</p>
+        <h2 data-i18n="terms.liability.title">Odgovornost</h2>
+        <p data-i18n="terms.liability.text">Lumie Beauty Salon ni odgovorna za nobeno škodo, ki bi nastala kot posledica uporabe te spletne strani. Vsa naročila in rezervacije so podvržena našim poslovnim pogojem.</p>
+        <h2 data-i18n="terms.governing.title">Veljavajoče Pravo</h2>
+        <p data-i18n="terms.governing.text">Ti pogoji se urejajo z zakonom Republike Slovenije. Vsi spori so predmet izključne pristojnosti sodišč v Republiki Sloveniji.</p>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Lumie</h4>
+            <p data-i18n="footer.desc">Intimni prostor lepote in osebne skrb. Samo Anja, samo za vas, samo Lumie.</p>
+        </div>
+        <div class="footer-section">
+            <h4 data-i18n="footer.contact">Kontakt</h4>
+            <p>Ankaranska cesta 5a, Koper<br/><span data-i18n="footer.hours">Odprt: Pon-Pet 9:00-19:00</span><br/>+386 40 123 456</p>
+        </div>
+        <div class="footer-section">
+            <h4 data-i18n="footer.legal">Pravno</h4>
+            <p><a onclick="showPage('imprint')" data-i18n="footer.imprint">Impresum</a><br/><a onclick="showPage('privacy')" data-i18n="footer.privacy">Politika Zasebnosti</a><br/><a onclick="showPage('terms')" data-i18n="footer.terms">Pogoji Uporabe</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footer.copyright">© 2026 Lumie Beauty Salon. Vse pravice pridržane.</p>
+    </div>
+</footer>
+
+<script>
+  window.uchatzWidget = { key: "98735219-265f-4d14-8c1a-733eb1bdb214", color: "#a43c12" };
+</script>
+<script src="https://uchatz.com/widget.js"></script>
+
+<script>
+const translations = {
+  sl: { 'nav.home': 'Dom', 'nav.services': 'Storitve', 'nav.about': 'O meni', 'nav.contact': 'Kontakt', 'nav.book': 'Rezerviraj', 'home.hero.radiant': 'Umetnost', 'home.hero.desc': 'Stopite v intimni prostor, kjer se klinična natančnost sreča z osebno nego. Doživite vrhunske lepotne tretmaje, zasnovane za razkritje vašega najbolj žarečega jaza.', 'home.personal.title': 'Samo Mene, Samo Za Vas', 'home.personal.intro': 'Sem Anja, lasnica Lumie. Vsak termin vodim osebno jaz – zato poznate vsakič isto osebo, iste roke in isto strokovno znanje. Tukaj ni timov, samo individualna pozornost in resna skrb za vašo lepoto.', 'home.explore': 'Raziskuj Storitve', 'home.reserve': 'Rezerviraj Zdaj', 'home.cta.title': 'Pripravljen/a za transformacijo?', 'home.cta.desc': 'Mesta se hitro napolnijo. Pošlji mi sporočilo ali pokliči.', 'home.cta.button': 'Rezerviraj Zdaj', 'services.title': 'Meni Storitev', 'services.desc': 'Specializiram se na vrhunske obdelave obraza in nege kože. Vsaka storitev je prilagojena vašim potrebam.', 'services.facial1.name': 'Lumie Sij Facial', 'services.facial1.desc': '60 min — Dvojno čiščenje, encimski peeling, infuzija kisika in hladilna maska. Popoln reset za vašo kožo.', 'services.facial2.name': 'Oblikuj in Dvigni', 'services.facial2.desc': '75 min — Globinska masaža obraza, namenjena napetosti in limfatičnemu odtoku. Vidni rezultati.', 'services.personal': '✨ Pred vsakim tretmajem opravim podrobno pogovor o vaših potrebah. Nisem tu za hitko storitev – sem tu za pravo skrb. Vsakega gosta poznam osebno.', 'about.hero': 'O Meni', 'about.founder': 'Anja Humar', 'about.founder.p1': 'Za mene je lepota bila vedno več kot samo koža. To je tiha samozavest, ki se širi, ko se res počutiš nego. Lumie sem ustanovila, ker sem verjela, da sta osebnost in strokovnost lahko neločljivi.', 'about.founder.p2': 'Z izobrazbo iz napredne estetike in 8+ let izkušenj sem se odločila, da bom delala samo sama. Ne zato, ker sem težka za delo (smehaj), ampak ker želim, da poznate vsakič isto osebo, isto roko, isti pristop. Ni tu zamenjav in površnosti – samo jaz in vaša lepota.', 'about.founder.p3': 'Vsak termin je mini-ritualno doživetje. Veste, kaj boste dobili. In to dobite res od mene, osebno.', 'about.solo.title': 'Zakaj Sam?', 'about.solo.consistency': 'Doslednost:', 'about.solo.consistency.text': 'Vsak tretma je enak. Isto tehniko, isto pozornost, iste rezultate dobite od mene.', 'about.solo.personal': 'Osebnost:', 'about.solo.personal.text': 'Poznate me. Nikoli ne menjam gesta, energije ali pristopa. Sem 100% vedno.', 'about.solo.quality': 'Kakovost:', 'about.solo.quality.text': 'Nisem pod časovnim pritiskom. Vsak tretma je toliko dolg, kolikor je potrebno. Ni hitenja.', 'about.values.1.title': 'Naravno in Etično', 'about.values.1.desc': 'Samo proizvodi brez okrutnosti in naravni ingredienčni.', 'about.values.2.title': 'Osebna Skrb', 'about.values.2.desc': 'Sem tukaj za vas, ne za kvote. Vsak gost je posebna oseba.', 'about.values.3.title': 'Strokovnost', 'about.values.3.desc': 'Kontinuirana izobrazba in ljubezen do svoje discipline.', 'contact.title': 'Kontaktiraj Me', 'contact.desc': 'Direktno do mene. Brez sekretaric, brez sistematike. Samo Anja.', 'contact.form.title': 'Pošlji Mi Sporočilo', 'contact.form.name': 'Ime', 'contact.form.email': 'E-pošta', 'contact.form.phone': 'Telefonska Številka', 'contact.form.message': 'Kaj te zanima?', 'contact.form.submit': 'Pošlji', 'contact.visit': 'Obišči Me', 'contact.address.label': 'Naslov', 'contact.hours.label': 'Delovni Čas', 'contact.hours.weekday': 'Pon – Pet', 'contact.phone.label': 'Pokličite Samo Mene', 'contact.email.label': 'E-pošta', 'contact.solo.message': 'Ker sem sama, imam omejene termine. Rezerviraj vnaprej. Ampak ko prihajaš k meni, veš, da ti je čas samo tvoj.', 'imprint.title': 'Impresum', 'imprint.business': 'Podjetje', 'imprint.owner': 'Lastnik', 'imprint.legal': 'Pravna forma', 'imprint.vat': 'Davčna številka', 'imprint.contact': 'Kontakt', 'imprint.responsible': 'Odgovorna oseba', 'imprint.responsible.text': 'Anja Humar je odgovorna oseba za vsebino na tej spletni strani v skladu z zakonodajo Republike Slovenije.', 'privacy.title': 'Politika Zasebnosti', 'privacy.intro.title': 'Uvod', 'privacy.intro.text': 'Lumie Beauty Salon se zavezuje k vaši zasebnosti. Ta politika pojasnjuje, kako zbiramo, uporabljamo in varujemo vaše osebne podatke.', 'privacy.data.title': 'Zbiranje Podatkov', 'privacy.data.text': 'Podatke zbiramo samo s pomočjo kontaktnega obrazca. Zbrani podatki vključujejo ime, e-poštni naslov, telefonsko številko in sporočilo. Ti podatki se uporabljajo izključno za odgovor na vaš poizvedek.', 'privacy.protection.title': 'Zaščita Podatkov', 'privacy.protection.text': 'Vaši osebni podatki so varni in se ne razkrij tretjim stranem brez vašega soglasja, razen kot zahteva zakon. Spletna stran uporablja HTTPS za šifriranje podatkov med pošiljanjem.', 'privacy.rights.title': 'Vaše Pravice', 'privacy.rights.text': 'Imate pravico dostopa, popravljanja ali brisanja svojih osebnih podatkov. Za uresničitev teh pravic nas kontaktirajte prek e-pošte na hello@lumie.si.', 'terms.title': 'Pogoji Uporabe', 'terms.intro.title': 'Splošno', 'terms.intro.text': 'Uporaba te spletne strani pomeni, da se strinjate s temi pogoji uporabe. Če se s pogoji ne strinjate, prosimo, ne uporabljajte te spletne strani.', 'terms.services.title': 'Storitve', 'terms.services.text': 'Storitve so dostopne samo osebam, ki so stare vsaj 18 let. Lumie Beauty Salon si pridržuje pravico do spremembe ali prekinca storitev brez predhodnega obvestila.', 'terms.liability.title': 'Odgovornost', 'terms.liability.text': 'Lumie Beauty Salon ni odgovorna za nobeno škodo, ki bi nastala kot posledica uporabe te spletne strani. Vsa naročila in rezervacije so podvržena našim poslovnim pogojem.', 'terms.governing.title': 'Veljavajoče Pravo', 'terms.governing.text': 'Ti pogoji se urejajo z zakonom Republike Slovenije. Vsi spori so predmet izključne pristojnosti sodišč v Republiki Sloveniji.', 'footer.desc': 'Intimni prostor lepote in osebne skrb. Samo Anja, samo za vas, samo Lumie.', 'footer.contact': 'Kontakt', 'footer.hours': 'Odprt: Pon-Pet 9:00-19:00', 'footer.legal': 'Pravno', 'footer.imprint': 'Impresum', 'footer.privacy': 'Politika Zasebnosti', 'footer.terms': 'Pogoji Uporabe', 'footer.copyright': '© 2026 Lumie Beauty Salon. Vse pravice pridržane.' },
+  en: { 'nav.home': 'Home', 'nav.services': 'Services', 'nav.about': 'About', 'nav.contact': 'Contact', 'nav.book': 'Book', 'home.hero.radiant': 'The Art of', 'home.hero.desc': 'Step into an intimate space where clinical precision meets personal care. Experience high-end beauty treatments designed to unveil your most luminous self.', 'home.personal.title': 'Just Me, Just For You', 'home.personal.intro': 'I\'m Anja, owner of Lumie. Every appointment is personally led by me – so you always get the same person, same hands, same expertise. No teams, no corporate approach. Just individual attention and genuine care for your beauty.', 'home.explore': 'Explore Services', 'home.reserve': 'Book Now', 'home.cta.title': 'Ready for Your Transformation?', 'home.cta.desc': 'Spots fill quickly. Send me a message or give me a call.', 'home.cta.button': 'Book Now', 'services.title': 'Service Menu', 'services.desc': 'I specialize in premium facial treatments and skincare. Every service is tailored to your unique needs.', 'services.facial1.name': 'Lumie Glow Facial', 'services.facial1.desc': '60 min — Double cleanse, enzyme peel, oxygen infusion, and cooling mask. A complete reset for your skin.', 'services.facial2.name': 'Sculpt & Lift', 'services.facial2.desc': '75 min — Deep tissue facial massage targeting tension and lymphatic drainage. Visible results.', 'services.personal': '✨ Before every treatment, I have a detailed conversation about your needs. I\'m not here for quick treatments – I\'m here for real care. I know every guest personally.', 'about.hero': 'About Me', 'about.founder': 'Anja Humar', 'about.founder.p1': 'Beauty has always been more than skin to me. It\'s the quiet confidence that radiates when you truly feel cared for. I founded Lumie because I believed that personal touch and expertise could go hand in hand.', 'about.founder.p2': 'With a background in advanced aesthetics and 8+ years of experience, I decided to work solo. Not because I\'m difficult (smile), but because I want you to know that every time you come in, it\'s the same person, the same hands, the same approach. No substitutes, no superficiality – just me and your beauty.', 'about.founder.p3': 'Every appointment is a mini-ritual. You know what you\'re getting. And you get it directly from me, in person.', 'about.solo.title': 'Why Solo?', 'about.solo.consistency': 'Consistency:', 'about.solo.consistency.text': 'Every treatment is the same. Same technique, same attention, same results – always from me.', 'about.solo.personal': 'Personal:', 'about.solo.personal.text': 'You know me. I never change my energy or approach. I\'m 100% present, always.', 'about.solo.quality': 'Quality:', 'about.solo.quality.text': 'I\'m not under time pressure. Each treatment takes as long as it needs. No rushing.', 'about.values.1.title': 'Natural & Ethical', 'about.values.1.desc': 'Only cruelty-free products with natural ingredients.', 'about.values.2.title': 'Personal Care', 'about.values.2.desc': 'I\'m here for you, not for quotas. Every guest is a unique person.', 'about.values.3.title': 'Expertise', 'about.values.3.desc': 'Continuous learning and genuine passion for what I do.', 'contact.title': 'Contact Me', 'contact.desc': 'Directly to me. No receptionists, no bureaucracy. Just Anja.', 'contact.form.title': 'Send Me a Message', 'contact.form.name': 'Name', 'contact.form.email': 'Email', 'contact.form.phone': 'Phone Number', 'contact.form.message': 'What interests you?', 'contact.form.submit': 'Send', 'contact.visit': 'Visit Me', 'contact.address.label': 'Address', 'contact.hours.label': 'Opening Hours', 'contact.hours.weekday': 'Mon – Fri', 'contact.phone.label': 'Call Me Directly', 'contact.email.label': 'Email', 'contact.solo.message': 'Because I work alone, spots are limited. Book ahead. But when you come to me, you know your time is exclusively yours.', 'imprint.title': 'Imprint', 'imprint.business': 'Business Information', 'imprint.owner': 'Owner', 'imprint.legal': 'Legal Form', 'imprint.vat': 'VAT Number', 'imprint.contact': 'Contact', 'imprint.responsible': 'Responsible Person', 'imprint.responsible.text': 'Anja Humar is the responsible person for the content of this website in accordance with the laws of the Republic of Slovenia.', 'privacy.title': 'Privacy Policy', 'privacy.intro.title': 'Introduction', 'privacy.intro.text': 'Lumie Beauty Salon is committed to your privacy. This policy explains how we collect, use, and protect your personal data.', 'privacy.data.title': 'Data Collection', 'privacy.data.text': 'We collect data only through the contact form. Collected data includes name, email address, phone number, and message. This data is used exclusively to respond to your inquiry.', 'privacy.protection.title': 'Data Protection', 'privacy.protection.text': 'Your personal data is secure and will not be disclosed to third parties without your consent, except as required by law. The website uses HTTPS to encrypt data during transmission.', 'privacy.rights.title': 'Your Rights', 'privacy.rights.text': 'You have the right to access, correct, or delete your personal data. To exercise these rights, contact us via email at hello@lumie.si.', 'terms.title': 'Terms of Use', 'terms.intro.title': 'General', 'terms.intro.text': 'Use of this website means you agree to these terms of use. If you do not agree with the terms, please do not use this website.', 'terms.services.title': 'Services', 'terms.services.text': 'Services are available only to persons aged 18 and over. Lumie Beauty Salon reserves the right to modify or discontinue services without notice.', 'terms.liability.title': 'Liability', 'terms.liability.text': 'Lumie Beauty Salon is not responsible for any damage resulting from the use of this website. All bookings and reservations are subject to our business terms.', 'terms.governing.title': 'Governing Law', 'terms.governing.text': 'These terms are governed by the law of the Republic of Slovenia. All disputes are subject to the exclusive jurisdiction of the courts in the Republic of Slovenia.', 'footer.desc': 'An intimate space of beauty and personal care. Just Anja, just for you, just Lumie.', 'footer.contact': 'Contact', 'footer.hours': 'Open: Mon-Fri 9:00-19:00', 'footer.legal': 'Legal', 'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy Policy', 'footer.terms': 'Terms of Use', 'footer.copyright': '© 2026 Lumie Beauty Salon. All rights reserved.' },
+  it: { 'nav.home': 'Home', 'nav.services': 'Servizi', 'nav.about': 'Chi Sono', 'nav.contact': 'Contatti', 'nav.book': 'Prenota', 'home.hero.radiant': 'L\'Arte dello', 'home.hero.desc': 'Entra in uno spazio intimo dove la precisione clinica incontra l\'attenzione personale. Sperimenta trattamenti di bellezza premium progettati per rivelare il tuo io più luminoso.', 'home.personal.title': 'Solo Io, Solo Per Te', 'home.personal.intro': 'Sono Anja, proprietaria di Lumie. Ogni appuntamento è condotto personalmente da me – quindi incontri sempre la stessa persona, le stesse mani, la stessa competenza. Nessun team, nessun approccio generico. Solo attenzione individuale e vera cura per la tua bellezza.', 'home.explore': 'Esplora i Servizi', 'home.reserve': 'Prenota Ora', 'home.cta.title': 'Pronto per la Tua Trasformazione?', 'home.cta.desc': 'I posti si riempiono velocemente. Inviami un messaggio o chiamami.', 'home.cta.button': 'Prenota Ora', 'services.title': 'Menu Servizi', 'services.desc': 'Mi specializzo in trattamenti viso premium e cura della pelle. Ogni servizio è adattato alle tue esigenze uniche.', 'services.facial1.name': 'Lumie Glow Facial', 'services.facial1.desc': '60 min — Doppia pulizia, peeling enzimatico, infusione di ossigeno e maschera rinfrescante. Un reset completo per la tua pelle.', 'services.facial2.name': 'Sculpt & Lift', 'services.facial2.desc': '75 min — Massaggio facciale profondo che mira alla tensione e al drenaggio linfatico. Risultati visibili.', 'services.personal': '✨ Prima di ogni trattamento, ho una conversazione dettagliata sulle tue esigenze. Non sono qui per trattamenti veloci – sono qui per vera cura. Conosco ogni cliente personalmente.', 'about.hero': 'Chi Sono', 'about.founder': 'Anja Humar', 'about.founder.p1': 'La bellezza è sempre stata più che solo pelle per me. È la fiducia tranquilla che brilla quando ti senti veramente curato. Ho fondato Lumie perché credevo che il tocco personale e l\'esperienza potessero andare di pari passo.', 'about.founder.p2': 'Con una formazione in estetica avanzata e 8+ anni di esperienza, ho deciso di lavorare da sola. Non perché sono difficile (sorridimi), ma perché voglio che sai che ogni volta che vieni, incontri la stessa persona, le stesse mani, lo stesso approccio. Niente sostituzioni, niente superficialità – solo io e la tua bellezza.', 'about.founder.p3': 'Ogni appuntamento è un mini-rituale. Sai cosa otterrai. E lo ottieni direttamente da me, di persona.', 'about.solo.title': 'Perché Da Sola?', 'about.solo.consistency': 'Coerenza:', 'about.solo.consistency.text': 'Ogni trattamento è lo stesso. Stessa tecnica, stessa attenzione, stessi risultati – sempre da me.', 'about.solo.personal': 'Personale:', 'about.solo.personal.text': 'Mi conosci. Non cambio mai la mia energia o approccio. Sono 100% presente, sempre.', 'about.solo.quality': 'Qualità:', 'about.solo.quality.text': 'Non sono sotto pressione di tempo. Ogni trattamento richiede il tempo necessario. Niente fretta.', 'about.values.1.title': 'Naturale e Etico', 'about.values.1.desc': 'Solo prodotti cruelty-free con ingredienti naturali.', 'about.values.2.title': 'Cura Personale', 'about.values.2.desc': 'Sono qui per te, non per quote. Ogni cliente è una persona unica.', 'about.values.3.title': 'Esperienza', 'about.values.3.desc': 'Apprendimento continuo e vera passione per quello che faccio.', 'contact.title': 'Contattami', 'contact.desc': 'Direttamente a me. Nessun segretario, nessuna burocrazia. Solo Anja.', 'contact.form.title': 'Inviami un Messaggio', 'contact.form.name': 'Nome', 'contact.form.email': 'Email', 'contact.form.phone': 'Numero di Telefono', 'contact.form.message': 'Cosa ti interessa?', 'contact.form.submit': 'Invia', 'contact.visit': 'Visitami', 'contact.address.label': 'Indirizzo', 'contact.hours.label': 'Orari di Apertura', 'contact.hours.weekday': 'Lun – Ven', 'contact.phone.label': 'Chiamami Direttamente', 'contact.email.label': 'Email', 'contact.solo.message': 'Perché lavoro da sola, i posti sono limitati. Prenota in anticipo. Ma quando vieni da me, sai che il tuo tempo è esclusivamente tuo.', 'imprint.title': 'Impronta', 'imprint.business': 'Informazioni Aziendali', 'imprint.owner': 'Proprietario', 'imprint.legal': 'Forma Legale', 'imprint.vat': 'Numero di IVA', 'imprint.contact': 'Contatti', 'imprint.responsible': 'Persona Responsabile', 'imprint.responsible.text': 'Anja Humar è la persona responsabile dei contenuti di questo sito web in conformità alle leggi della Repubblica di Slovenia.', 'privacy.title': 'Politica sulla Privacy', 'privacy.intro.title': 'Introduzione', 'privacy.intro.text': 'Lumie Beauty Salon è impegnata nella tua privacy. Questa politica spiega come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.', 'privacy.data.title': 'Raccolta Dati', 'privacy.data.text': 'Raccogliamo dati solo attraverso il modulo di contatto. I dati raccolti includono nome, indirizzo email, numero di telefono e messaggio. Questi dati vengono utilizzati esclusivamente per rispondere alla tua richiesta.', 'privacy.protection.title': 'Protezione Dati', 'privacy.protection.text': 'I tuoi dati personali sono protetti e non verranno divulgati a terzi senza il tuo consenso, se non richiesto dalla legge. Il sito utilizza HTTPS per crittografare i dati durante la trasmissione.', 'privacy.rights.title': 'I Tuoi Diritti', 'privacy.rights.text': 'Hai il diritto di accedere, correggere o eliminare i tuoi dati personali. Per esercitare questi diritti, contattaci via email all\'indirizzo hello@lumie.si.', 'terms.title': 'Termini di Utilizzo', 'terms.intro.title': 'Generale', 'terms.intro.text': 'L\'utilizzo di questo sito web significa che accetti questi termini di utilizzo. Se non sei d\'accordo con i termini, non utilizzare questo sito web.', 'terms.services.title': 'Servizi', 'terms.services.text': 'I servizi sono disponibili solo per le persone di età pari o superiore a 18 anni. Lumie Beauty Salon si riserva il diritto di modificare o interrompere i servizi senza preavviso.', 'terms.liability.title': 'Responsabilità', 'terms.liability.text': 'Lumie Beauty Salon non è responsabile per alcun danno derivante dall\'uso di questo sito web. Tutte le prenotazioni sono soggette ai nostri termini commerciali.', 'terms.governing.title': 'Legge Applicabile', 'terms.governing.text': 'Questi termini sono disciplinati dalla legge della Repubblica di Slovenia. Tutte le controversie sono soggette alla giurisdizione esclusiva dei tribunali della Repubblica di Slovenia.', 'footer.desc': 'Uno spazio intimo di bellezza e cura personale. Solo Anja, solo per te, solo Lumie.', 'footer.contact': 'Contatti', 'footer.hours': 'Aperto: Lun-Ven 9:00-19:00', 'footer.legal': 'Legale', 'footer.imprint': 'Impronta', 'footer.privacy': 'Politica sulla Privacy', 'footer.terms': 'Termini di Utilizzo', 'footer.copyright': '© 2026 Lumie Beauty Salon. Tutti i diritti riservati.' }
+};
+
+let currentLanguage = 'sl';
+
+function setLanguage(lang) {
+  currentLanguage = lang;
+  localStorage.setItem('lumie-lang', lang);
+  document.documentElement.lang = lang;
+  document.getElementById('langSelect').value = lang;
+  updateTranslations();
+}
+
+function updateTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = translations[currentLanguage][key] || key;
+  });
+}
+
+function showPage(pageName) {
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+  document.getElementById(`page-${pageName}`).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function openUchatzWidget() {
+  if (window.uchatzWidgetToggle) window.uchatzWidgetToggle();
+}
+
+const savedLang = localStorage.getItem('lumie-lang') || 'sl';
+if (savedLang !== 'sl') setLanguage(savedLang);
+else updateTranslations();
+
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const msg = currentLanguage === 'en' ? 'Thank you! I\'ll get back to you soon.' : currentLanguage === 'it' ? 'Grazie! Ti risponderò presto.' : 'Hvala! Odgovorila ti bom kmalu.';
+  alert(msg);
+  e.target.reset();
+});
+</script>
+
+</body>
+</html>
